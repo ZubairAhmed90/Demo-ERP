@@ -26,7 +26,8 @@ import APInvoice from './ap-invoice/page.jsx';
 import APCreditMemo from './ap-credit-memo/page.jsx';
 import ARInvoice from './ar-invoice/page.jsx';
 import ARCreditMemo from './ar-credit-memo/page.jsx';
-
+import Reports from './reports/page.jsx';
+import Settings from './settings/page.jsx';
 
 function App() {
   return (
@@ -54,12 +55,13 @@ function App() {
           <Route path="/return" element={<Return />} />
           <Route path="/return-request" element={<ReturnRequest />} />
           <Route path="/opportunity" element={<Opportunity />} />
-                           <Route path="/ap-invoice" element={<APInvoice />} />
-                 <Route path="/ap-credit-memo" element={<APCreditMemo />} />
-                 <Route path="/ar-invoice" element={<ARInvoice />} />
-                 <Route path="/ar-credit-memo" element={<ARCreditMemo />} />
-             
-               </Routes>
+          <Route path="/ap-invoice" element={<APInvoice />} />
+          <Route path="/ap-credit-memo" element={<APCreditMemo />} />
+          <Route path="/ar-invoice" element={<ARInvoice />} />
+          <Route path="/ar-credit-memo" element={<ARCreditMemo />} />
+          <Route path="/reports" element={<Reports />} />
+          <Route path="/settings" element={<Settings />} />
+        </Routes>
       </RootLayout>
     </Router>
   );

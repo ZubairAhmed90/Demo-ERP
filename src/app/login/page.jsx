@@ -76,38 +76,38 @@ const Login = () => {
       </div>
 
       {/* Centered Form Container with Two Partitions */}
-      <div className="relative z-10 bg-white rounded-2xl shadow-2xl max-w-6xl w-full flex">
+      <div className="relative z-10 bg-white rounded-2xl shadow-2xl max-w-5xl w-full flex">
         
         {/* Left Partition - Main Image */}
-        <div className="w-1/2 flex items-end mb-12 justify-center">
+        <div className="w-1/2 flex items-end mb-8 justify-center">
           {logoSrc && (
-            <img src={logoSrc} className="h-80 w-auto" alt="Company Logo" />
+            <img src={logoSrc} className="h-64 w-auto" alt="Company Logo" />
           )}
         </div>
 
         {/* Right Partition - Login Form */}
-        <div className="w-1/2 h-auto p-8 flex flex-col justify-center">
+        <div className="w-1/2 h-auto p-6 flex flex-col justify-center">
           {(selectedCompany === "Istanbul Electrical" || selectedCompany === "Select Company") && (
-            <div className="absolute top-4 left-4 ml-6">
-              <img src="/logo-dafnia.png" className="h-32 w-auto" alt="Default Logo" />
+            <div className="absolute top-3 left-3 ml-4">
+              <img src="/logo-dafnia.png" className="h-24 w-auto" alt="Default Logo" />
             </div>
           )}
 
           {/* Welcome Text */}
-          <div className="text-left text-2xl font-bold mb-6">
+          <div className="text-left text-xl font-bold mb-4">
             {selectedCompany}
           </div>
 
           {/* Login Form */}
-          <form className="space-y-8">
+          <form className="space-y-5">
             {companyError && (
-              <p className="p-2 bg-red-200 text-red-500 w-full rounded-md">
+              <p className="p-2 bg-red-200 text-red-500 w-full rounded-md text-sm">
                 Choose A Company
               </p>
             )}
             
             <div>
-              <label htmlFor="company" className="block text-md font-medium text-gray-700">
+              <label htmlFor="company" className="block text-sm font-medium text-gray-700">
                 Company
               </label>
               <select
@@ -127,13 +127,13 @@ const Login = () => {
             </div>
 
             {userNameError && (
-              <p className="p-2 bg-red-200 text-red-500 w-full rounded-md">
+              <p className="p-2 bg-red-200 text-red-500 w-full rounded-md text-sm">
                 Invalid User Name or Password
               </p>
             )}
 
             <div>
-              <label htmlFor="username" className="block text-md font-medium text-gray-700">
+              <label htmlFor="username" className="block text-sm font-medium text-gray-700">
                 Username
               </label>
               <input
@@ -152,7 +152,7 @@ const Login = () => {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-md font-medium text-gray-700">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                 Password
               </label>
               <input
@@ -161,7 +161,7 @@ const Login = () => {
                 name="password"
                 value={password}
                 onChange={handleChangePassword}
-                className={`mt-1 block mb-4 w-full px-3 py-2 border ${
+                className={`mt-1 block w-full px-3 py-2 border ${
                   passwordError ? "border-red-500" : "border-gray-300"
                 } rounded-md shadow-sm focus:outline-none focus:border-indigo-500 
                 focus:ring focus:ring-indigo-200 focus:ring-opacity-50`}
@@ -174,12 +174,12 @@ const Login = () => {
               type="button"
               onClick={handleSubmit}
               style={{ backgroundColor: primaryColor }}
-              className="w-full text-white py-2 px-4 rounded-md duration-400 focus:outline-none mt-4"
+              className="w-full text-white py-2 px-4 rounded-md duration-400 focus:outline-none mt-2"
             >
               Sign In
             </button>
 
-            <p className="text-center text-gray-500 hover:underline">
+            <p className="text-center text-gray-500 hover:underline text-sm">
               Forgot Password?
             </p>
           </form>

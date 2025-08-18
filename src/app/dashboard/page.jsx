@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useColor } from '../../context/ColorContext.jsx';
 import Layout from '../../components/Layout/Layout.jsx';
 import Cards from '../../components/cards/dashboard/cards.jsx';
+import Chart from 'chart.js/auto';
 import { 
   FaFileInvoice, 
   FaShoppingCart, 
@@ -24,6 +25,140 @@ import {
 export default function Page() {
   const navigate = useNavigate();
   const { primaryColor, secondaryColor } = useColor();
+  
+  // Chart refs
+  const revenueChartRef = useRef(null);
+  const revenueChartInstance = useRef(null);
+
+  // Sample revenue data for the chart
+  const revenueData = [
+    { month: 'Jan', revenue: 1800000, target: 1500000 },
+    { month: 'Feb', revenue: 2100000, target: 1800000 },
+    { month: 'Mar', revenue: 1950000, target: 2000000 },
+    { month: 'Apr', revenue: 2400000, target: 2200000 },
+    { month: 'May', revenue: 2800000, target: 2500000 },
+    { month: 'Jun', revenue: 3200000, target: 2800000 }
+  ];
+
+  // Initialize revenue chart
+  useEffect(() => {
+    if (revenueChartRef.current && !revenueChartInstance.current) {
+      const ctx = revenueChartRef.current.getContext('2d');
+      
+      revenueChartInstance.current = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: revenueData.map(item => item.month),
+          datasets: [
+            {
+              label: 'Revenue',
+              data: revenueData.map(item => item.revenue),
+              borderColor: primaryColor,
+              backgroundColor: `${primaryColor}15`,
+              borderWidth: 3,
+              fill: true,
+              tension: 0.4,
+              pointBackgroundColor: primaryColor,
+              pointBorderColor: '#fff',
+              pointBorderWidth: 2,
+              pointRadius: 5,
+              pointHoverRadius: 7
+            },
+            {
+              label: 'Target',
+              data: revenueData.map(item => item.target),
+              borderColor: '#10B981',
+              backgroundColor: '#10B98115',
+              borderWidth: 2,
+              fill: false,
+              tension: 0.4,
+              borderDash: [5, 5],
+              pointBackgroundColor: '#10B981',
+              pointBorderColor: '#fff',
+              pointBorderWidth: 2,
+              pointRadius: 4,
+              pointHoverRadius: 6
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'top',
+              labels: {
+                usePointStyle: true,
+                padding: 15,
+                font: {
+                  size: 11,
+                  weight: '600'
+                }
+              }
+            },
+            tooltip: {
+              backgroundColor: 'rgba(0, 0, 0, 0.8)',
+              titleColor: '#fff',
+              bodyColor: '#fff',
+              borderColor: primaryColor,
+              borderWidth: 1,
+              cornerRadius: 8,
+              displayColors: true,
+              callbacks: {
+                label: function(context) {
+                  const label = context.dataset.label || '';
+                  const value = context.parsed.y;
+                  return `${label}: ${(value / 1000000).toFixed(1)}M SAR`;
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: {
+                display: false
+              },
+              ticks: {
+                font: {
+                  size: 11,
+                  weight: '600'
+                },
+                color: '#6B7280'
+              }
+            },
+            y: {
+              grid: {
+                color: '#E5E7EB',
+                drawBorder: false
+              },
+              ticks: {
+                font: {
+                  size: 11,
+                  weight: '600'
+                },
+                color: '#6B7280',
+                callback: function(value) {
+                  return (value / 1000000).toFixed(1) + 'M';
+                }
+              },
+              beginAtZero: true
+            }
+          },
+          interaction: {
+            intersect: false,
+            mode: 'index'
+          }
+        }
+      });
+    }
+
+    return () => {
+      if (revenueChartInstance.current) {
+        revenueChartInstance.current.destroy();
+        revenueChartInstance.current = null;
+      }
+    };
+  }, [primaryColor]);
 
   // Quick action handlers
   const handleQuickAction = (action) => {
@@ -418,18 +553,8 @@ export default function Page() {
                   <option>Last Year</option>
                 </select>
               </div>
-              <div className="h-64 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-24 h-24 rounded-full border-8 border-gray-100 flex items-center justify-center mb-4" style={{ borderColor: `${primaryColor}20` }}>
-                    <div className="w-16 h-16 rounded-full" style={{ backgroundColor: primaryColor }} />
-                  </div>
-                  <p className="text-sm text-gray-500">Chart visualization</p>
-                  <p className="text-lg font-semibold text-gray-700 mt-2">Revenue: 2.4M SAR</p>
-                  <div className="flex items-center justify-center space-x-2 mt-2">
-                    <span className="text-green-500 text-sm">↗ +18.5%</span>
-                    <span className="text-gray-400 text-xs">vs last month</span>
-                  </div>
-                </div>
+              <div className="h-64 relative">
+                <canvas ref={revenueChartRef} />
               </div>
             </div>
 
