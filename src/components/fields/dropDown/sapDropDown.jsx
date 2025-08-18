@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { FaChevronDown, FaSearch, FaCheck } from 'react-icons/fa';
+import { FaChevronDown, FaSearch, FaCheck, FaTimes } from 'react-icons/fa';
+import { useColor } from '../../../context/ColorContext.jsx';
 
 const SapDropDown = ({ 
   label, 
@@ -17,25 +18,27 @@ const SapDropDown = ({
   multiple = false,
   className = "",
   style = {},
-  secondaryColor = "#f3f4f6"
+  showLabel = true
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedOptions, setSelectedOptions] = useState(multiple ? (value || []) : []);
+  const [isFocused, setIsFocused] = useState(false);
   const dropdownRef = useRef(null);
+  const { primaryColor, secondaryColor } = useColor();
 
   // Size classes
   const sizeClasses = {
-    small: "text-xs px-2 py-1",
-    medium: "text-sm px-3 py-2",
+    small: "text-xs px-3 py-2",
+    medium: "text-sm px-4 py-3",
     large: "text-base px-4 py-3"
   };
 
-  // Variant classes
+  // Variant classes with modern design
   const variantClasses = {
-    default: "border-gray-300 bg-white hover:border-gray-400 focus:border-blue-500 focus:ring-blue-500",
-    outlined: "border-2 border-gray-300 bg-transparent hover:border-gray-400 focus:border-blue-500 focus:ring-blue-500",
-    filled: "border-gray-300 bg-gray-50 hover:bg-gray-100 focus:bg-white focus:border-blue-500 focus:ring-blue-500"
+    default: `border-2 border-gray-200 bg-white hover:border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20`,
+    outlined: `border-2 border-gray-300 bg-transparent hover:border-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20`,
+    filled: `border-2 border-gray-200 bg-gray-50 hover:bg-gray-100 hover:border-gray-300 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20`
   };
 
   // Filter options based on search term
@@ -51,18 +54,19 @@ const SapDropDown = ({
     if (multiple) {
       const isSelected = selectedOptions.some(selected => selected.value === option.value);
       if (isSelected) {
-        setSelectedOptions(selectedOptions.filter(selected => selected.value !== option.value));
+        const newSelected = selectedOptions.filter(selected => selected.value !== option.value);
+        setSelectedOptions(newSelected);
+        if (onChange) onChange(newSelected);
       } else {
-        setSelectedOptions([...selectedOptions, option]);
+        const newSelected = [...selectedOptions, option];
+        setSelectedOptions(newSelected);
+        if (onChange) onChange(newSelected);
       }
     } else {
       setSelectedOptions([option]);
       setIsOpen(false);
       setSearchTerm("");
-    }
-    
-    if (onChange) {
-      onChange(multiple ? selectedOptions : option);
+      if (onChange) onChange(option);
     }
   };
 
@@ -84,6 +88,7 @@ const SapDropDown = ({
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsOpen(false);
         setSearchTerm("");
+        setIsFocused(false);
       }
     };
 
@@ -108,11 +113,19 @@ const SapDropDown = ({
     return selectedOptions.map(option => option.value);
   };
 
+  // Remove selected option in multiple mode
+  const removeSelectedOption = (optionToRemove, e) => {
+    e.stopPropagation();
+    const newSelected = selectedOptions.filter(option => option.value !== optionToRemove.value);
+    setSelectedOptions(newSelected);
+    if (onChange) onChange(newSelected);
+  };
+
   return (
     <div className={`relative ${className}`} ref={dropdownRef} style={style}>
       {/* Label */}
-      {label && (
-        <label className={`block text-sm font-medium text-gray-700 mb-1 ${required ? 'after:content-["*"] after:ml-0.5 after:text-red-500' : ''}`}>
+      {showLabel && label && (
+        <label className={`block text-sm font-semibold text-gray-700 mb-2 ${required ? 'after:content-["*"] after:ml-1 after:text-red-500' : ''}`}>
           {label}
         </label>
       )}
@@ -126,29 +139,29 @@ const SapDropDown = ({
               relative w-full cursor-pointer
               ${sizeClasses[size]}
               ${variantClasses[variant]}
-              rounded-md transition-all duration-200
+              rounded-xl transition-all duration-300 ease-in-out
               ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
-              ${error ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
+              ${error ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20' : ''}
+              ${isFocused ? 'shadow-lg transform scale-[1.02]' : 'shadow-sm'}
             `}
             onClick={() => !disabled && setIsOpen(!isOpen)}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
           >
             <div className="flex items-center justify-between">
-              <div className="flex flex-wrap gap-1 min-h-[20px]">
+              <div className="flex flex-wrap gap-2 min-h-[24px] flex-1">
                 {selectedOptions.map((option, index) => (
                   <span
                     key={index}
-                    className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-blue-100 text-blue-800"
+                    className="inline-flex items-center px-3 py-1 rounded-lg text-xs font-medium bg-blue-100 text-blue-800 border border-blue-200 hover:bg-blue-200 transition-colors duration-200"
                   >
                     {option.label}
                     <button
                       type="button"
-                      className="ml-1 inline-flex items-center justify-center w-4 h-4 rounded-full text-blue-400 hover:bg-blue-200 hover:text-blue-600"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleOptionSelect(option);
-                      }}
+                      className="ml-2 inline-flex items-center justify-center w-4 h-4 rounded-full text-blue-500 hover:bg-blue-300 hover:text-blue-700 transition-colors duration-200"
+                      onClick={(e) => removeSelectedOption(option, e)}
                     >
-                      ×
+                      <FaTimes className="w-3 h-3" />
                     </button>
                   </span>
                 ))}
@@ -157,7 +170,7 @@ const SapDropDown = ({
                 )}
               </div>
               <FaChevronDown 
-                className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} 
+                className={`w-4 h-4 text-gray-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} 
               />
             </div>
           </div>
@@ -167,13 +180,16 @@ const SapDropDown = ({
             value={selectedOptions[0]?.value || ''}
             onChange={handleSingleValueChange}
             disabled={disabled}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
             className={`
               w-full appearance-none cursor-pointer
               ${sizeClasses[size]}
               ${variantClasses[variant]}
-              rounded-md transition-all duration-200
+              rounded-xl transition-all duration-300 ease-in-out
               ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
-              ${error ? 'border-red-500 focus:border-red-500 focus:ring-blue-500' : ''}
+              ${error ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20' : ''}
+              ${isFocused ? 'shadow-lg transform scale-[1.02]' : 'shadow-sm'}
             `}
           >
             <option value="">{placeholder}</option>
@@ -187,10 +203,10 @@ const SapDropDown = ({
 
         {/* Custom Dropdown for Multiple Select */}
         {multiple && isOpen && (
-          <div className="absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto">
+          <div className="absolute z-50 w-full mt-2 bg-white border-2 border-gray-200 rounded-xl shadow-2xl max-h-60 overflow-hidden animate-slide-down">
             {/* Search Input */}
             {searchable && (
-              <div className="sticky top-0 p-2 bg-gray-50 border-b border-gray-200">
+              <div className="sticky top-0 p-3 bg-gray-50 border-b border-gray-200">
                 <div className="relative">
                   <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                   <input
@@ -198,18 +214,24 @@ const SapDropDown = ({
                     placeholder="Search options..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full pl-10 pr-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full pl-10 pr-3 py-2 text-sm border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200"
                     onClick={(e) => e.stopPropagation()}
+                    autoFocus
                   />
                 </div>
               </div>
             )}
 
             {/* Options List */}
-            <div className="py-1">
+            <div className="py-2 max-h-48 overflow-y-auto">
               {filteredOptions.length === 0 ? (
-                <div className="px-3 py-2 text-sm text-gray-500 text-center">
-                  No options found
+                <div className="px-4 py-3 text-sm text-gray-500 text-center">
+                  <div className="flex flex-col items-center space-y-2">
+                    <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+                      <FaSearch className="w-4 h-4 text-gray-400" />
+                    </div>
+                    <span>No options found</span>
+                  </div>
                 </div>
               ) : (
                 filteredOptions.map((option, index) => {
@@ -218,20 +240,26 @@ const SapDropDown = ({
                     <div
                       key={index}
                       className={`
-                        flex items-center px-3 py-2 text-sm cursor-pointer hover:bg-gray-100
-                        ${isSelected ? 'bg-blue-50 text-blue-900' : 'text-gray-900'}
+                        flex items-center px-4 py-3 text-sm cursor-pointer transition-all duration-200
+                        ${isSelected 
+                          ? 'bg-blue-50 text-blue-900 border-r-2 border-blue-500' 
+                          : 'text-gray-900 hover:bg-gray-50 hover:border-r-2 hover:border-gray-200'
+                        }
                       `}
                       onClick={() => handleOptionSelect(option)}
                     >
                       {multiple && (
                         <div className={`
-                          w-4 h-4 border-2 rounded mr-3 flex items-center justify-center
-                          ${isSelected ? 'border-blue-500 bg-blue-500' : 'border-gray-300'}
+                          w-5 h-5 border-2 rounded-lg mr-3 flex items-center justify-center transition-all duration-200
+                          ${isSelected 
+                            ? 'border-blue-500 bg-blue-500 shadow-sm' 
+                            : 'border-gray-300 hover:border-gray-400'
+                          }
                         `}>
                           {isSelected && <FaCheck className="w-3 h-3 text-white" />}
                         </div>
                       )}
-                      <span className={isSelected ? 'font-medium' : ''}>
+                      <span className={`${isSelected ? 'font-semibold' : 'font-medium'}`}>
                         {option.label}
                       </span>
                     </div>
@@ -245,7 +273,12 @@ const SapDropDown = ({
 
       {/* Error Message */}
       {error && errorMessage && (
-        <p className="mt-1 text-sm text-red-600">{errorMessage}</p>
+        <div className="mt-2 flex items-center space-x-2 text-sm text-red-600">
+          <div className="w-4 h-4 bg-red-100 rounded-full flex items-center justify-center">
+            <span className="text-red-500 text-xs">!</span>
+          </div>
+          <span>{errorMessage}</span>
+        </div>
       )}
 
       {/* Hidden input for form submission */}

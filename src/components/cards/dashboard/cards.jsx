@@ -1,7 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FaChartLine, FaUsers, FaBuilding, FaBoxes, FaShoppingCart, FaTruck, FaFileInvoice, FaCreditCard, FaArrowUp, FaArrowDown } from 'react-icons/fa';
 
 const Cards = ({ primaryColor, secondaryColor, count, value, currency, label, type = 'default', trend = 'up', trendValue = '12%' }) => {
+    const navigate = useNavigate();
+
     // Define icons for different card types
     const getIcon = (cardType) => {
         switch (cardType) {
@@ -35,9 +38,40 @@ const Cards = ({ primaryColor, secondaryColor, count, value, currency, label, ty
         return trend === 'up' ? 'text-green-600' : 'text-red-600';
     };
 
+    // Handle card click navigation
+    const handleCardClick = () => {
+        switch (type) {
+            case 'users':
+                navigate('/users');
+                break;
+            case 'company':
+                navigate('/company');
+                break;
+            case 'inventory':
+                navigate('/inventory-req');
+                break;
+            case 'sales':
+                navigate('/sales-order');
+                break;
+            case 'purchase':
+                navigate('/purchase-order');
+                break;
+            case 'invoice':
+                navigate('/ap-invoice');
+                break;
+            case 'credit':
+                navigate('/ap-credit-memo');
+                break;
+            default:
+                console.log('Card type not implemented:', type);
+        }
+    };
+
     return (
         <div
             className="group relative bg-white rounded-xl p-6 shadow-sm hover:shadow-lg border border-gray-100 transition-all duration-300 overflow-hidden cursor-pointer"
+            onClick={handleCardClick}
+            title={`Click to view ${label.toLowerCase()}`}
         >
             {/* Background decoration */}
             <div 
@@ -141,6 +175,14 @@ const Cards = ({ primaryColor, secondaryColor, count, value, currency, label, ty
                 className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-transparent to-transparent group-hover:from-transparent group-hover:via-primary group-hover:to-transparent transition-all duration-300"
                 style={{ '--tw-gradient-from': 'transparent', '--tw-gradient-via': primaryColor, '--tw-gradient-to': 'transparent' }}
             />
+
+            {/* Click indicator */}
+            <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div 
+                    className="w-2 h-2 rounded-full"
+                    style={{ backgroundColor: primaryColor }}
+                />
+            </div>
         </div>
     );
 };
