@@ -11,7 +11,17 @@ export default defineConfig({
   },
   root: '.',
   build: {
-    outDir: 'dist'
+    outDir: 'dist',
+    chunkSizeWarningLimit: 1000,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          chart: ['chart.js', 'react-chartjs-2'],
+          ui: ['react-icons', 'framer-motion']
+        }
+      }
+    }
   },
   resolve: {
     alias: {
