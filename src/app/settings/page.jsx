@@ -30,7 +30,7 @@ export default function Settings() {
   const [profileData, setProfileData] = useState({
     firstName: 'Admin',
     lastName: 'User',
-    email: 'admin@dafnia.com',
+    email: 'admin@tychora.com',
     phone: '+966 50 123 4567',
     position: 'System Administrator',
     department: 'IT'

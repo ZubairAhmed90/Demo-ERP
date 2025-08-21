@@ -19,10 +19,10 @@ const Login = () => {
     const company = event.target.value;
     setSelectedCompany(company);
 
-    if (company === "Dafnia Electronics") {
-      setLogoSrc("/logo-dafnia.png");
+    if (company === "Company ONE") {
+      setLogoSrc("/colored-logo.png");
     } else if (company === "Sub-Company-2") {
-      setLogoSrc("/logo-dafnia.png");
+      setLogoSrc("/colored-logo.png");
     } else {
       setLogoSrc(null); 
     }
@@ -87,9 +87,9 @@ const Login = () => {
 
         {/* Right Partition - Login Form */}
         <div className="w-1/2 h-auto p-6 flex flex-col justify-center">
-          {(selectedCompany === "Istanbul Electrical" || selectedCompany === "Select Company") && (
+          {(selectedCompany === "Company Two" || selectedCompany === "Select Company") && (
             <div className="absolute top-3 left-3 ml-4">
-              <img src="/logo-dafnia.png" className="h-24 w-auto" alt="Default Logo" />
+              <img src="/colored-logo.png" className="h-24 w-auto" alt="Default Logo" />
             </div>
           )}
 
@@ -120,8 +120,8 @@ const Login = () => {
                 required
               >
                 <option value="Select Company">Select Company</option>
-                <option value="Dafnia Electronics">Dafnia Electronics</option>
-                <option value="Istanbul Electrical">Istanbul Electrical</option>
+                <option value="Company One">Company One</option>
+                <option value="Company Two">Company TWO</option>
                 <option value="Sub-Company-2">Sub-Company-2</option>
               </select>
             </div>

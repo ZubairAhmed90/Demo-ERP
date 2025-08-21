@@ -15,13 +15,13 @@ export default function Layout({ children }) {
     <div className={`${font.className} h-screen flex flex-col overflow-hidden`}>
       {/* Navbar / Header */}
       <header className="flex items-center justify-between px-6 py-3 border-b border-gray-200 bg-white shadow-sm z-10" style={{ background: navbar ? secondaryColor : "white" }}>
-        <img src="/dafnia-png.png" className='w-auto h-14 p-2' alt="Dafnia Logo" />
+        <img src="/colored-logo.png" className='w-auto h-14 p-2' alt="cOMPANY Logo" />
         
         <h1
           className="text-xl font-semibold"
           style={{ color: primaryColor, filter: 'brightness(70%)' }} 
         >
-          Welcome To Dafnia Portal
+          Welcome To tychora Portal
         </h1>
 
         <div className="flex items-center space-x-4">
