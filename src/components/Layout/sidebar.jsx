@@ -53,7 +53,9 @@ import {
   FaBell,
   FaStickyNote,
   FaEnvelope,
-  FaTasks
+  FaTasks,
+  FaRuler,
+  FaFileContract
 } from "react-icons/fa";
 import { GoGraph } from "react-icons/go";
 import { font } from "../font/poppins";
@@ -85,6 +87,7 @@ const Sidebar = ({ isOpen = true }) => {
   const [isCRMOpen, setIsCRMOpen] = useState(false);
   const [isManufacturingOpen, setIsManufacturingOpen] = useState(false);
   const [isCommunicationOpen, setIsCommunicationOpen] = useState(false);
+  const [isMasterDataOpen, setIsMasterDataOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -1125,13 +1128,66 @@ const Sidebar = ({ isOpen = true }) => {
                    {renderLink("/documents", FaFileAlt, "Document Management")}
                  </div>
 
+                 {/* Master Data Section */}
+                 <div className="mb-6">
+                   <h3 className={`text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 ${!isOpen && 'hidden'}`}>
+                     Master Data
+                   </h3>
+                   {isOpen ? (
+                     <div>
+                       <p
+                         className="flex items-center py-2 px-3 rounded-lg transition-all duration-200 cursor-pointer text-sm font-medium"
+                         style={{
+                           backgroundColor: isMasterDataOpen ? primaryColor : "transparent",
+                           color: isMasterDataOpen ? "white" : "#374151",
+                         }}
+                         onMouseEnter={(e) => {
+                           if (!isMasterDataOpen) {
+                             e.target.style.backgroundColor = `${primaryColor}15`;
+                             e.target.style.color = primaryColor;
+                           }
+                         }}
+                         onMouseLeave={(e) => {
+                           if (!isMasterDataOpen) {
+                             e.target.style.backgroundColor = "transparent";
+                             e.target.style.color = "#374151";
+                           }
+                         }}
+                         onClick={() => setIsMasterDataOpen(!isMasterDataOpen)}
+                       >
+                         <FaCog size="16px" />
+                         <span className="ml-2">Master Data</span>
+                         <svg
+                           className={`ml-auto w-4 h-4 transition-transform duration-200 ${isMasterDataOpen ? 'rotate-180' : ''}`}
+                           fill="none"
+                           stroke="currentColor"
+                           viewBox="0 0 24 24"
+                         >
+                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                         </svg>
+                       </p>
+                       {isMasterDataOpen && (
+                         <div className="mt-1 space-y-0.5">
+                           {renderLink("/currencies", FaDollarSign, "Currencies", true)}
+                           {renderLink("/master-data/price-lists", FaDollarSign, "Price Lists", true)}
+                           {renderLink("/master-data/uom", FaRuler, "UOM", true)}
+                           {renderLink("/master-data/payment-terms", FaFileContract, "Payment Terms", true)}
+                           {renderLink("/master-data/shipping-methods", FaTruck, "Shipping Methods", true)}
+                           {renderLink("/master-data/payment-methods", FaCreditCard, "Payment Methods", true)}
+                         </div>
+                       )}
+                     </div>
+                   ) : (
+                     renderCollapsedMenu(FaCog, isMasterDataOpen, setIsMasterDataOpen, true)
+                   )}
+                 </div>
+
                  {/* System Administration Section */}
                  <div className="mb-6">
                    <h3 className={`text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 ${!isOpen && 'hidden'}`}>
                      System
                    </h3>
                    {renderLink("/audit-trail", FaHistory, "Audit Trail")}
-                   {renderLink("/currencies", FaDollarSign, "Currencies")}
                  </div>
 
                  {/* Settings Section */}

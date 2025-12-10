@@ -29,6 +29,12 @@ import AuditTrail from './audit-trail/page.jsx';
 import FixedAssetsDepreciation from './fixed-assets/depreciation/page.jsx';
 // Currency Management
 import Currencies from './currencies/page.jsx';
+// Master Data
+import PriceLists from './master-data/price-lists/page.jsx';
+import UOM from './master-data/uom/page.jsx';
+import PaymentTerms from './master-data/payment-terms/page.jsx';
+import ShippingMethods from './master-data/shipping-methods/page.jsx';
+import PaymentMethods from './master-data/payment-methods/page.jsx';
 // Communication & Collaboration
 import Notes from './notes/page.jsx';
 import Messaging from './messaging/page.jsx';
@@ -245,6 +251,12 @@ function App() {
           <Route path="/audit-trail" element={<AuditTrail />} />
           {/* Currency Management Routes */}
           <Route path="/currencies" element={<Currencies />} />
+          {/* Master Data Routes */}
+          <Route path="/master-data/price-lists" element={<PriceLists />} />
+          <Route path="/master-data/uom" element={<UOM />} />
+          <Route path="/master-data/payment-terms" element={<PaymentTerms />} />
+          <Route path="/master-data/shipping-methods" element={<ShippingMethods />} />
+          <Route path="/master-data/payment-methods" element={<PaymentMethods />} />
           {/* Communication & Collaboration Routes */}
           <Route path="/notes" element={<Notes />} />
           <Route path="/messaging" element={<Messaging />} />
