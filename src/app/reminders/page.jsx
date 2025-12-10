@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaBell, FaPlus, FaSearch, FaEdit, FaTrash, FaCheck, FaClock, FaCalendarAlt, FaExclamationCircle, FaRepeat } from 'react-icons/fa';
+import { FaBell, FaPlus, FaSearch, FaEdit, FaTrash, FaCheck, FaClock, FaCalendarAlt, FaExclamationCircle, FaRedo } from 'react-icons/fa';
 import { useColor } from '../../context/ColorContext.jsx';
 import Layout from '../../components/Layout/Layout.jsx';
 import Pagination from '../../components/pagination/Pagination.jsx';
@@ -374,7 +374,7 @@ const Page = () => {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center space-x-1">
                         {reminder.repeat !== 'None' && (
-                          <FaRepeat className="w-3 h-3 text-gray-400" />
+                          <FaRedo className="w-3 h-3 text-gray-400" />
                         )}
                         <span className="text-sm text-gray-900">{reminder.repeat}</span>
                       </div>
