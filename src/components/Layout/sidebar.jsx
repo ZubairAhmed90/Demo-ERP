@@ -1108,6 +1108,7 @@ const Sidebar = ({ isOpen = true }) => {
                            {renderLink("/messaging", FaEnvelope, "Messaging", true)}
                            {renderLink("/tasks", FaTasks, "Tasks", true)}
                            {renderLink("/calendar", FaCalendarAlt, "Calendar", true)}
+                           {renderLink("/reminders", FaBell, "Reminders", true)}
                          </div>
                        )}
                      </div>

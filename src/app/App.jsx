@@ -34,6 +34,7 @@ import Notes from './notes/page.jsx';
 import Messaging from './messaging/page.jsx';
 import Tasks from './tasks/page.jsx';
 import Calendar from './calendar/page.jsx';
+import Reminders from './reminders/page.jsx';
 import SalesOrder from './sales-order/page.jsx';
 import SalesQuotation from './sales-quotation/page.jsx';
 import PurchaseOrder from './purchase-order/page.jsx';
@@ -249,6 +250,7 @@ function App() {
           <Route path="/messaging" element={<Messaging />} />
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/calendar" element={<Calendar />} />
+          <Route path="/reminders" element={<Reminders />} />
           {/* Reports & Settings */}
           <Route path="/reports" element={<Reports />} />
           <Route path="/settings" element={<Settings />} />
