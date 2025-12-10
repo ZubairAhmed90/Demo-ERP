@@ -254,6 +254,7 @@ const Sidebar = ({ isOpen = true }) => {
                     {renderLink("/create-users", null, "Create User", true)}
                     {renderLink("/roles", null, "Manage Roles", true)}
                     {renderLink("/roles/permissions", null, "Role Permissions", true)}
+                    {renderLink("/employee-portal", null, "Employee Portal", true)}
                   </div>
                 )}
               </div>

@@ -12,6 +12,12 @@ import CreateUsers from './create-users/page.jsx';
 import Users from './users/page.jsx';
 import Roles from './roles/page.jsx';
 import RolePermissions from './roles/permissions/page.jsx';
+// Employee Portal Module
+import EmployeePortalDashboard from './employee-portal/dashboard/page.jsx';
+import EmployeePortalPayslips from './employee-portal/payslips/page.jsx';
+import EmployeePortalLeaves from './employee-portal/leaves/page.jsx';
+import EmployeePortalAttendance from './employee-portal/attendance/page.jsx';
+import EmployeePortalProfile from './employee-portal/profile/page.jsx';
 import SalesOrder from './sales-order/page.jsx';
 import SalesQuotation from './sales-quotation/page.jsx';
 import PurchaseOrder from './purchase-order/page.jsx';
@@ -205,6 +211,13 @@ function App() {
           <Route path="/manufacturing/work-orders" element={<ManufacturingWorkOrders />} />
           <Route path="/manufacturing/quality-control" element={<ManufacturingQualityControl />} />
           <Route path="/manufacturing/production-planning" element={<ManufacturingProductionPlanning />} />
+          {/* Employee Portal Routes */}
+          <Route path="/employee-portal" element={<EmployeePortalDashboard />} />
+          <Route path="/employee-portal/dashboard" element={<EmployeePortalDashboard />} />
+          <Route path="/employee-portal/payslips" element={<EmployeePortalPayslips />} />
+          <Route path="/employee-portal/leaves" element={<EmployeePortalLeaves />} />
+          <Route path="/employee-portal/attendance" element={<EmployeePortalAttendance />} />
+          <Route path="/employee-portal/profile" element={<EmployeePortalProfile />} />
           {/* Reports & Settings */}
           <Route path="/reports" element={<Reports />} />
           <Route path="/settings" element={<Settings />} />
