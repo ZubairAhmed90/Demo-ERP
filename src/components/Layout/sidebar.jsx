@@ -32,18 +32,19 @@ import {
   FaDollarSign,
   FaBook,
   FaSitemap,
-  FaFileAlt,
   FaChartLine,
   FaBuilding as FaBuildingIcon,
   FaBox,
   FaArrowDown,
   FaClipboardCheck,
-  FaChartBar,
   FaProjectDiagram,
   FaCheckCircle,
   FaHistory,
   FaPercent,
-  FaLayerGroup
+  FaLayerGroup,
+  FaChartPie,
+  FaRoute,
+  FaChartArea
 } from "react-icons/fa";
 import { GoGraph } from "react-icons/go";
 import { font } from "../font/poppins";
@@ -67,6 +68,9 @@ const Sidebar = ({ isOpen = true }) => {
   const [isFixedAssetsOpen, setIsFixedAssetsOpen] = useState(false);
   const [isWorkflowOpen, setIsWorkflowOpen] = useState(false);
   const [isTaxOpen, setIsTaxOpen] = useState(false);
+  const [isProcurementOpen, setIsProcurementOpen] = useState(false);
+  const [isSupplyChainOpen, setIsSupplyChainOpen] = useState(false);
+  const [isReportingOpen, setIsReportingOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -358,6 +362,58 @@ const Sidebar = ({ isOpen = true }) => {
               </div>
             ) : (
               renderCollapsedMenu(FaWarehouse, isInventoryOpen, setIsInventoryOpen, true)
+            )}
+          </div>
+
+          {/* Procurement Section */}
+          <div className="mb-6">
+            <h3 className={`text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 ${!isOpen && 'hidden'}`}>
+              Procurement
+            </h3>
+            {isOpen ? (
+              <div>
+                <p
+                  className="flex items-center py-2 px-3 rounded-lg transition-all duration-200 cursor-pointer text-sm font-medium"
+                  style={{
+                    backgroundColor: isProcurementOpen ? primaryColor : "transparent",
+                    color: isProcurementOpen ? "white" : "#374151",
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isProcurementOpen) {
+                      e.target.style.backgroundColor = `${primaryColor}15`;
+                      e.target.style.color = primaryColor;
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isProcurementOpen) {
+                      e.target.style.backgroundColor = "transparent";
+                      e.target.style.color = "#374151";
+                    }
+                  }}
+                  onClick={() => setIsProcurementOpen(!isProcurementOpen)}
+                >
+                  <FaTruck size="16px" />
+                  <span className="ml-2">Procurement</span>
+                  <svg
+                    className={`ml-auto w-4 h-4 transition-transform duration-200 ${isProcurementOpen ? 'rotate-180' : ''}`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </p>
+                {isProcurementOpen && (
+                  <div className="mt-1 space-y-0.5">
+                    {renderLink("/procurement/vendors", FaTruck, "Vendors", true)}
+                    {renderLink("/procurement/rfq", FaFileAlt, "RFQ", true)}
+                    {renderLink("/procurement/supplier-performance", FaChartLine, "Supplier Performance", true)}
+                    {renderLink("/procurement/analytics", FaChartPie, "Procurement Analytics", true)}
+                  </div>
+                )}
+              </div>
+            ) : (
+              renderCollapsedMenu(FaTruck, isProcurementOpen, setIsProcurementOpen, true)
             )}
           </div>
 
@@ -733,14 +789,115 @@ const Sidebar = ({ isOpen = true }) => {
                    )}
                  </div>
 
-                 {/* Reports Section */}
+                 {/* Supply Chain Section */}
                  <div className="mb-6">
                    <h3 className={`text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 ${!isOpen && 'hidden'}`}>
-                     Reports
+                     Supply Chain
                    </h3>
-                   {renderLink("/reports", FaChartBar, "Analytics")}
-                   {renderLink("/settings", FaCog, "Settings")}
+                   {isOpen ? (
+                     <div>
+                       <p
+                         className="flex items-center py-2 px-3 rounded-lg transition-all duration-200 cursor-pointer text-sm font-medium"
+                         style={{
+                           backgroundColor: isSupplyChainOpen ? primaryColor : "transparent",
+                           color: isSupplyChainOpen ? "white" : "#374151",
+                         }}
+                         onMouseEnter={(e) => {
+                           if (!isSupplyChainOpen) {
+                             e.target.style.backgroundColor = `${primaryColor}15`;
+                             e.target.style.color = primaryColor;
+                           }
+                         }}
+                         onMouseLeave={(e) => {
+                           if (!isSupplyChainOpen) {
+                             e.target.style.backgroundColor = "transparent";
+                             e.target.style.color = "#374151";
+                           }
+                         }}
+                         onClick={() => setIsSupplyChainOpen(!isSupplyChainOpen)}
+                       >
+                         <FaRoute size="16px" />
+                         <span className="ml-2">Supply Chain</span>
+                         <svg
+                           className={`ml-auto w-4 h-4 transition-transform duration-200 ${isSupplyChainOpen ? 'rotate-180' : ''}`}
+                           fill="none"
+                           stroke="currentColor"
+                           viewBox="0 0 24 24"
+                         >
+                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                         </svg>
+                       </p>
+                       {isSupplyChainOpen && (
+                         <div className="mt-1 space-y-0.5">
+                           {renderLink("/supply-chain/logistics", FaRoute, "Logistics", true)}
+                           {renderLink("/supply-chain/distribution", FaTruck, "Distribution", true)}
+                           {renderLink("/supply-chain/demand-forecasting", FaChartArea, "Demand Forecasting", true)}
+                         </div>
+                       )}
+                     </div>
+                   ) : (
+                     renderCollapsedMenu(FaRoute, isSupplyChainOpen, setIsSupplyChainOpen, true)
+                   )}
                  </div>
+
+                 {/* Reporting Section */}
+                 <div className="mb-6">
+                   <h3 className={`text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 ${!isOpen && 'hidden'}`}>
+                     Reporting
+                   </h3>
+                   {isOpen ? (
+                     <div>
+                       <p
+                         className="flex items-center py-2 px-3 rounded-lg transition-all duration-200 cursor-pointer text-sm font-medium"
+                         style={{
+                           backgroundColor: isReportingOpen ? primaryColor : "transparent",
+                           color: isReportingOpen ? "white" : "#374151",
+                         }}
+                         onMouseEnter={(e) => {
+                           if (!isReportingOpen) {
+                             e.target.style.backgroundColor = `${primaryColor}15`;
+                             e.target.style.color = primaryColor;
+                           }
+                         }}
+                         onMouseLeave={(e) => {
+                           if (!isReportingOpen) {
+                             e.target.style.backgroundColor = "transparent";
+                             e.target.style.color = "#374151";
+                           }
+                         }}
+                         onClick={() => setIsReportingOpen(!isReportingOpen)}
+                       >
+                         <FaChartBar size="16px" />
+                         <span className="ml-2">Reporting</span>
+                         <svg
+                           className={`ml-auto w-4 h-4 transition-transform duration-200 ${isReportingOpen ? 'rotate-180' : ''}`}
+                           fill="none"
+                           stroke="currentColor"
+                           viewBox="0 0 24 24"
+                         >
+                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                         </svg>
+                       </p>
+                       {isReportingOpen && (
+                         <div className="mt-1 space-y-0.5">
+                           {renderLink("/reports", FaChartBar, "Analytics", true)}
+                           {renderLink("/reporting/report-builder", FaFileAlt, "Report Builder", true)}
+                           {renderLink("/reporting/scheduled-reports", FaClock, "Scheduled Reports", true)}
+                         </div>
+                       )}
+                     </div>
+                   ) : (
+                     renderCollapsedMenu(FaChartBar, isReportingOpen, setIsReportingOpen, true)
+                   )}
+                 </div>
+
+                 {/* Settings Section */}
+                 <div className="mb-6">
+                   <h3 className={`text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 ${!isOpen && 'hidden'}`}>
+                     Settings
+                   </h3>
+                   {renderLink("/settings", FaCog, "Settings")}
+          </div>
         </nav>
       </div>
     </aside>

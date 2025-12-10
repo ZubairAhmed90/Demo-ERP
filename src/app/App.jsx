@@ -67,6 +67,18 @@ import WorkflowApprovalHistory from './workflow/approval-history/page.jsx';
 // Tax Module
 import TaxTaxCodes from './tax/tax-codes/page.jsx';
 import TaxTaxGroups from './tax/tax-groups/page.jsx';
+// Procurement Module
+import ProcurementVendors from './procurement/vendors/page.jsx';
+import ProcurementRFQ from './procurement/rfq/page.jsx';
+import ProcurementSupplierPerformance from './procurement/supplier-performance/page.jsx';
+import ProcurementAnalytics from './procurement/analytics/page.jsx';
+// Supply Chain Module
+import SupplyChainLogistics from './supply-chain/logistics/page.jsx';
+import SupplyChainDemandForecasting from './supply-chain/demand-forecasting/page.jsx';
+import SupplyChainDistribution from './supply-chain/distribution/page.jsx';
+// Reporting Module
+import ReportingReportBuilder from './reporting/report-builder/page.jsx';
+import ReportingScheduledReports from './reporting/scheduled-reports/page.jsx';
 
 function App() {
   return (
@@ -137,6 +149,18 @@ function App() {
           {/* Tax Routes */}
           <Route path="/tax/tax-codes" element={<TaxTaxCodes />} />
           <Route path="/tax/tax-groups" element={<TaxTaxGroups />} />
+          {/* Procurement Routes */}
+          <Route path="/procurement/vendors" element={<ProcurementVendors />} />
+          <Route path="/procurement/rfq" element={<ProcurementRFQ />} />
+          <Route path="/procurement/supplier-performance" element={<ProcurementSupplierPerformance />} />
+          <Route path="/procurement/analytics" element={<ProcurementAnalytics />} />
+          {/* Supply Chain Routes */}
+          <Route path="/supply-chain/logistics" element={<SupplyChainLogistics />} />
+          <Route path="/supply-chain/demand-forecasting" element={<SupplyChainDemandForecasting />} />
+          <Route path="/supply-chain/distribution" element={<SupplyChainDistribution />} />
+          {/* Reporting Routes */}
+          <Route path="/reporting/report-builder" element={<ReportingReportBuilder />} />
+          <Route path="/reporting/scheduled-reports" element={<ReportingScheduledReports />} />
           {/* Reports & Settings */}
           <Route path="/reports" element={<Reports />} />
           <Route path="/settings" element={<Settings />} />
