@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Sidebar from './sidebar';
 import { useColor } from '../../context/ColorContext';
 import CustomButton from '../buttons/customButton/customButton';
+import NotificationCenter from '../Notifications/NotificationCenter';
 import { font } from '../font/poppins';
 
 export default function Layout({ children }) {
@@ -25,6 +26,7 @@ export default function Layout({ children }) {
         </h1>
 
         <div className="flex items-center space-x-4">
+          <NotificationCenter />
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
             className="p-2 rounded-lg hover:bg-gray-100 transition-colors"

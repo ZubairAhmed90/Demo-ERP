@@ -71,6 +71,8 @@ const Sidebar = ({ isOpen = true }) => {
   const [isBankingOpen, setIsBankingOpen] = useState(false);
   const [isFinanceOpen, setIsFinanceOpen] = useState(false);
   const [isFixedAssetsOpen, setIsFixedAssetsOpen] = useState(false);
+  const [isDocumentsOpen, setIsDocumentsOpen] = useState(false);
+  const [isSystemOpen, setIsSystemOpen] = useState(false);
   const [isWorkflowOpen, setIsWorkflowOpen] = useState(false);
   const [isTaxOpen, setIsTaxOpen] = useState(false);
   const [isProcurementOpen, setIsProcurementOpen] = useState(false);
@@ -747,7 +749,49 @@ const Sidebar = ({ isOpen = true }) => {
                    <h3 className={`text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 ${!isOpen && 'hidden'}`}>
                      Fixed Assets
                    </h3>
-                   {renderLink("/fixed-assets/register", FaBuildingIcon, "Asset Register")}
+                   {isOpen ? (
+                     <div>
+                       <p
+                         className="flex items-center py-2 px-3 rounded-lg transition-all duration-200 cursor-pointer text-sm font-medium"
+                         style={{
+                           backgroundColor: isFixedAssetsOpen ? primaryColor : "transparent",
+                           color: isFixedAssetsOpen ? "white" : "#374151",
+                         }}
+                         onMouseEnter={(e) => {
+                           if (!isFixedAssetsOpen) {
+                             e.target.style.backgroundColor = `${primaryColor}15`;
+                             e.target.style.color = primaryColor;
+                           }
+                         }}
+                         onMouseLeave={(e) => {
+                           if (!isFixedAssetsOpen) {
+                             e.target.style.backgroundColor = "transparent";
+                             e.target.style.color = "#374151";
+                           }
+                         }}
+                         onClick={() => setIsFixedAssetsOpen(!isFixedAssetsOpen)}
+                       >
+                         <FaBuildingIcon size="16px" />
+                         <span className="ml-2">Fixed Assets</span>
+                         <svg
+                           className={`ml-auto w-4 h-4 transition-transform duration-200 ${isFixedAssetsOpen ? 'rotate-180' : ''}`}
+                           fill="none"
+                           stroke="currentColor"
+                           viewBox="0 0 24 24"
+                         >
+                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                         </svg>
+                       </p>
+                       {isFixedAssetsOpen && (
+                         <div className="mt-1 space-y-0.5">
+                           {renderLink("/fixed-assets/register", FaBuildingIcon, "Asset Register", true)}
+                           {renderLink("/fixed-assets/depreciation", FaChartLine, "Depreciation", true)}
+                         </div>
+                       )}
+                     </div>
+                   ) : (
+                     renderCollapsedMenu(FaBuildingIcon, isFixedAssetsOpen, setIsFixedAssetsOpen, true)
+                   )}
                  </div>
 
                  {/* Workflow Section */}
@@ -1004,6 +1048,32 @@ const Sidebar = ({ isOpen = true }) => {
                    ) : (
                      renderCollapsedMenu(FaIndustry, isManufacturingOpen, setIsManufacturingOpen, true)
                    )}
+                 </div>
+
+                 {/* Notifications Section */}
+                 <div className="mb-6">
+                   <h3 className={`text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 ${!isOpen && 'hidden'}`}>
+                     Notifications
+                   </h3>
+                   {renderLink("/notifications", FaBell, "All Notifications")}
+                   {renderLink("/notifications/preferences", FaCog, "Preferences", true)}
+                 </div>
+
+                 {/* Documents Section */}
+                 <div className="mb-6">
+                   <h3 className={`text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 ${!isOpen && 'hidden'}`}>
+                     Documents
+                   </h3>
+                   {renderLink("/documents", FaFileAlt, "Document Management")}
+                 </div>
+
+                 {/* System Administration Section */}
+                 <div className="mb-6">
+                   <h3 className={`text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 ${!isOpen && 'hidden'}`}>
+                     System
+                   </h3>
+                   {renderLink("/audit-trail", FaHistory, "Audit Trail")}
+                   {renderLink("/currencies", FaDollarSign, "Currencies")}
                  </div>
 
                  {/* Settings Section */}

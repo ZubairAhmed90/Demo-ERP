@@ -18,6 +18,17 @@ import EmployeePortalPayslips from './employee-portal/payslips/page.jsx';
 import EmployeePortalLeaves from './employee-portal/leaves/page.jsx';
 import EmployeePortalAttendance from './employee-portal/attendance/page.jsx';
 import EmployeePortalProfile from './employee-portal/profile/page.jsx';
+// Notifications Module
+import Notifications from './notifications/page.jsx';
+import NotificationPreferences from './notifications/preferences/page.jsx';
+// Documents Module
+import Documents from './documents/page.jsx';
+// Audit Trail Module
+import AuditTrail from './audit-trail/page.jsx';
+// Fixed Assets - Depreciation
+import FixedAssetsDepreciation from './fixed-assets/depreciation/page.jsx';
+// Currency Management
+import Currencies from './currencies/page.jsx';
 import SalesOrder from './sales-order/page.jsx';
 import SalesQuotation from './sales-quotation/page.jsx';
 import PurchaseOrder from './purchase-order/page.jsx';
@@ -173,6 +184,7 @@ function App() {
           <Route path="/finance/budget-management" element={<FinanceBudgetManagement />} />
           {/* Fixed Assets Routes */}
           <Route path="/fixed-assets/register" element={<FixedAssetsRegister />} />
+          <Route path="/fixed-assets/depreciation" element={<FixedAssetsDepreciation />} />
           {/* Workflow Routes */}
           <Route path="/workflow/workflows" element={<WorkflowWorkflows />} />
           <Route path="/workflow/approval-requests" element={<WorkflowApprovalRequests />} />
@@ -218,6 +230,15 @@ function App() {
           <Route path="/employee-portal/leaves" element={<EmployeePortalLeaves />} />
           <Route path="/employee-portal/attendance" element={<EmployeePortalAttendance />} />
           <Route path="/employee-portal/profile" element={<EmployeePortalProfile />} />
+          {/* Notifications Routes */}
+          <Route path="/notifications" element={<Notifications />} />
+          <Route path="/notifications/preferences" element={<NotificationPreferences />} />
+          {/* Documents Routes */}
+          <Route path="/documents" element={<Documents />} />
+          {/* Audit Trail Routes */}
+          <Route path="/audit-trail" element={<AuditTrail />} />
+          {/* Currency Management Routes */}
+          <Route path="/currencies" element={<Currencies />} />
           {/* Reports & Settings */}
           <Route path="/reports" element={<Reports />} />
           <Route path="/settings" element={<Settings />} />
