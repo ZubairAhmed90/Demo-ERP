@@ -49,10 +49,7 @@ import {
   FaLightbulb,
   FaComments,
   FaCogs,
-  FaIndustry,
-  FaClipboardList,
-  FaCheckCircle as FaCheckCircleIcon,
-  FaCalendarAlt as FaCalendarAltIcon
+  FaIndustry
 } from "react-icons/fa";
 import { GoGraph } from "react-icons/go";
 import { font } from "../font/poppins";
