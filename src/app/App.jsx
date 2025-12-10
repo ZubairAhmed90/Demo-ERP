@@ -79,18 +79,25 @@ import SupplyChainDistribution from './supply-chain/distribution/page.jsx';
 // Reporting Module
 import ReportingReportBuilder from './reporting/report-builder/page.jsx';
 import ReportingScheduledReports from './reporting/scheduled-reports/page.jsx';
+import ReportingCreateReport from './reporting/create-report/page.jsx';
+import ReportingCreateScheduledReport from './reporting/create-scheduled-report/page.jsx';
 // CRM Module
 import CRMCustomers from './crm/customers/page.jsx';
 import CRMContacts from './crm/contacts/page.jsx';
 import CRMLeads from './crm/leads/page.jsx';
 import CRMSalesPipeline from './crm/sales-pipeline/page.jsx';
 import CRMCommunicationHistory from './crm/communication-history/page.jsx';
+import CRMCreateCustomer from './crm/create-customer/page.jsx';
+import CRMCreateContact from './crm/create-contact/page.jsx';
+import CRMCreateLead from './crm/create-lead/page.jsx';
 // Manufacturing Module
 import ManufacturingBOM from './manufacturing/bom/page.jsx';
 import ManufacturingProductionOrders from './manufacturing/production-orders/page.jsx';
 import ManufacturingWorkOrders from './manufacturing/work-orders/page.jsx';
 import ManufacturingQualityControl from './manufacturing/quality-control/page.jsx';
 import ManufacturingProductionPlanning from './manufacturing/production-planning/page.jsx';
+import ManufacturingCreateBOM from './manufacturing/create-bom/page.jsx';
+import ManufacturingCreateProductionOrder from './manufacturing/create-production-order/page.jsx';
 
 function App() {
   return (
@@ -172,16 +179,23 @@ function App() {
           <Route path="/supply-chain/distribution" element={<SupplyChainDistribution />} />
           {/* Reporting Routes */}
           <Route path="/reporting/report-builder" element={<ReportingReportBuilder />} />
+          <Route path="/reporting/create-report" element={<ReportingCreateReport />} />
           <Route path="/reporting/scheduled-reports" element={<ReportingScheduledReports />} />
+          <Route path="/reporting/create-scheduled-report" element={<ReportingCreateScheduledReport />} />
           {/* CRM Routes */}
           <Route path="/crm/customers" element={<CRMCustomers />} />
+          <Route path="/crm/create-customer" element={<CRMCreateCustomer />} />
           <Route path="/crm/contacts" element={<CRMContacts />} />
+          <Route path="/crm/create-contact" element={<CRMCreateContact />} />
           <Route path="/crm/leads" element={<CRMLeads />} />
+          <Route path="/crm/create-lead" element={<CRMCreateLead />} />
           <Route path="/crm/sales-pipeline" element={<CRMSalesPipeline />} />
           <Route path="/crm/communication-history" element={<CRMCommunicationHistory />} />
           {/* Manufacturing Routes */}
           <Route path="/manufacturing/bom" element={<ManufacturingBOM />} />
+          <Route path="/manufacturing/create-bom" element={<ManufacturingCreateBOM />} />
           <Route path="/manufacturing/production-orders" element={<ManufacturingProductionOrders />} />
+          <Route path="/manufacturing/create-production-order" element={<ManufacturingCreateProductionOrder />} />
           <Route path="/manufacturing/work-orders" element={<ManufacturingWorkOrders />} />
           <Route path="/manufacturing/quality-control" element={<ManufacturingQualityControl />} />
           <Route path="/manufacturing/production-planning" element={<ManufacturingProductionPlanning />} />
