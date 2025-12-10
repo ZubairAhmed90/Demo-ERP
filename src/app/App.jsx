@@ -11,6 +11,7 @@ import CreateCompany from './create-company/page.jsx';
 import CreateUsers from './create-users/page.jsx';
 import Users from './users/page.jsx';
 import Roles from './roles/page.jsx';
+import RolePermissions from './roles/permissions/page.jsx';
 import SalesOrder from './sales-order/page.jsx';
 import SalesQuotation from './sales-quotation/page.jsx';
 import PurchaseOrder from './purchase-order/page.jsx';
@@ -116,6 +117,7 @@ function App() {
           <Route path="/create-users" element={<CreateUsers />} />
           <Route path="/users" element={<Users />} />
           <Route path="/roles" element={<Roles />} />
+          <Route path="/roles/permissions" element={<RolePermissions />} />
           <Route path="/sales-order" element={<SalesOrder />} />
           <Route path="/sales-quotation" element={<SalesQuotation />} />
           <Route path="/purchase-order" element={<PurchaseOrder />} />

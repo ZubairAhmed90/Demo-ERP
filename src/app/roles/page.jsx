@@ -317,14 +317,23 @@ const Page = () => {
                 <p className="text-gray-600">Define and manage user roles and permissions</p>
               </div>
             </div>
-            <button
-              onClick={() => setShowCreateModal(true)}
-              className="flex items-center space-x-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:shadow-md transform hover:-translate-y-0.5"
-              style={{ backgroundColor: primaryColor, color: 'white' }}
-            >
-              <FaPlus className="w-4 h-4" />
-              <span>Create Role</span>
-            </button>
+            <div className="flex items-center space-x-3">
+              <button
+                onClick={() => navigate('/roles/permissions')}
+                className="flex items-center space-x-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:shadow-md transform hover:-translate-y-0.5 border border-gray-300 text-gray-700 hover:bg-gray-50"
+              >
+                <FaShieldAlt className="w-4 h-4" />
+                <span>Manage Permissions</span>
+              </button>
+              <button
+                onClick={() => setShowCreateModal(true)}
+                className="flex items-center space-x-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:shadow-md transform hover:-translate-y-0.5"
+                style={{ backgroundColor: primaryColor, color: 'white' }}
+              >
+                <FaPlus className="w-4 h-4" />
+                <span>Create Role</span>
+              </button>
+            </div>
           </div>
         </div>
 
