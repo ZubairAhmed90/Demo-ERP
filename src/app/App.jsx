@@ -28,6 +28,22 @@ import ARInvoice from './ar-invoice/page.jsx';
 import ARCreditMemo from './ar-credit-memo/page.jsx';
 import Reports from './reports/page.jsx';
 import Settings from './settings/page.jsx';
+// HR Module
+import HREmployees from './hr/employees/page.jsx';
+import HRAttendance from './hr/attendance/page.jsx';
+import HRLeaveManagement from './hr/leave-management/page.jsx';
+import HRPerformanceReviews from './hr/performance-reviews/page.jsx';
+import HRCreateEmployee from './hr/create-employee/page.jsx';
+import HRCreateLeaveRequest from './hr/create-leave-request/page.jsx';
+// Payroll Module
+import PayrollProcessing from './payroll/processing/page.jsx';
+import PayrollPayslips from './payroll/payslips/page.jsx';
+import PayrollSalaryStructure from './payroll/salary-structure/page.jsx';
+// Banking Module
+import BankingAccounts from './banking/accounts/page.jsx';
+import BankingTransactions from './banking/transactions/page.jsx';
+import BankingReconciliation from './banking/reconciliation/page.jsx';
+import BankingCreateAccount from './banking/create-account/page.jsx';
 
 function App() {
   return (
@@ -59,6 +75,23 @@ function App() {
           <Route path="/ap-credit-memo" element={<APCreditMemo />} />
           <Route path="/ar-invoice" element={<ARInvoice />} />
           <Route path="/ar-credit-memo" element={<ARCreditMemo />} />
+          {/* HR Routes */}
+          <Route path="/hr/employees" element={<HREmployees />} />
+          <Route path="/hr/create-employee" element={<HRCreateEmployee />} />
+          <Route path="/hr/attendance" element={<HRAttendance />} />
+          <Route path="/hr/leave-management" element={<HRLeaveManagement />} />
+          <Route path="/hr/create-leave-request" element={<HRCreateLeaveRequest />} />
+          <Route path="/hr/performance-reviews" element={<HRPerformanceReviews />} />
+          {/* Payroll Routes */}
+          <Route path="/payroll/processing" element={<PayrollProcessing />} />
+          <Route path="/payroll/payslips" element={<PayrollPayslips />} />
+          <Route path="/payroll/salary-structure" element={<PayrollSalaryStructure />} />
+          {/* Banking Routes */}
+          <Route path="/banking/accounts" element={<BankingAccounts />} />
+          <Route path="/banking/create-account" element={<BankingCreateAccount />} />
+          <Route path="/banking/transactions" element={<BankingTransactions />} />
+          <Route path="/banking/reconciliation" element={<BankingReconciliation />} />
+          {/* Reports & Settings */}
           <Route path="/reports" element={<Reports />} />
           <Route path="/settings" element={<Settings />} />
         </Routes>

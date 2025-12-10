@@ -20,7 +20,16 @@ import {
   FaHandshake,
   FaFileAlt,
   FaReceipt,
-  FaArrowRight
+  FaArrowRight,
+  FaUserTie,
+  FaClock,
+  FaCalendarAlt,
+  FaMoneyBillWave,
+  FaUniversity,
+  FaFileInvoiceDollar,
+  FaStar,
+  FaBalanceScale,
+  FaDollarSign
 } from "react-icons/fa";
 import { GoGraph } from "react-icons/go";
 import { font } from "../font/poppins";
@@ -37,6 +46,9 @@ const Sidebar = ({ isOpen = true }) => {
   const [isSaleOpen, setIsSaleOpen] = useState(false);
   const [isCompanyOpen, setIsCompanyOpen] = useState(false);
   const [isUserOpen, setIsUserOpen] = useState(false);
+  const [isHROpen, setIsHROpen] = useState(false);
+  const [isPayrollOpen, setIsPayrollOpen] = useState(false);
+  const [isBankingOpen, setIsBankingOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -378,6 +390,160 @@ const Sidebar = ({ isOpen = true }) => {
               </div>
             ) : (
               renderCollapsedMenu(FaBoxes, isPurchaseOpen, setIsPurchaseOpen, true)
+            )}
+          </div>
+
+          {/* HR Section */}
+          <div className="mb-6">
+            <h3 className={`text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 ${!isOpen && 'hidden'}`}>
+              Human Resources
+            </h3>
+            {isOpen ? (
+              <div>
+                <p
+                  className="flex items-center py-2 px-3 rounded-lg transition-all duration-200 cursor-pointer text-sm font-medium"
+                  style={{
+                    backgroundColor: isHROpen ? primaryColor : "transparent",
+                    color: isHROpen ? "white" : "#374151",
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isHROpen) {
+                      e.target.style.backgroundColor = `${primaryColor}15`;
+                      e.target.style.color = primaryColor;
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isHROpen) {
+                      e.target.style.backgroundColor = "transparent";
+                      e.target.style.color = "#374151";
+                    }
+                  }}
+                  onClick={() => setIsHROpen(!isHROpen)}
+                >
+                  <FaUserTie size="16px" />
+                  <span className="ml-2">HR Management</span>
+                  <svg 
+                    className={`ml-auto w-4 h-4 transition-transform duration-200 ${isHROpen ? 'rotate-180' : ''}`} 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </p>
+                {isHROpen && (
+                  <div className="mt-1 space-y-0.5">
+                    {renderLink("/hr/employees", FaUserTie, "Employees", true)}
+                    {renderLink("/hr/attendance", FaClock, "Attendance", true)}
+                    {renderLink("/hr/leave-management", FaCalendarAlt, "Leave Management", true)}
+                    {renderLink("/hr/performance-reviews", FaStar, "Performance Reviews", true)}
+                  </div>
+                )}
+              </div>
+            ) : (
+              renderCollapsedMenu(FaUserTie, isHROpen, setIsHROpen, true)
+            )}
+          </div>
+
+          {/* Payroll Section */}
+          <div className="mb-6">
+            <h3 className={`text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 ${!isOpen && 'hidden'}`}>
+              Payroll
+            </h3>
+            {isOpen ? (
+              <div>
+                <p
+                  className="flex items-center py-2 px-3 rounded-lg transition-all duration-200 cursor-pointer text-sm font-medium"
+                  style={{
+                    backgroundColor: isPayrollOpen ? primaryColor : "transparent",
+                    color: isPayrollOpen ? "white" : "#374151",
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isPayrollOpen) {
+                      e.target.style.backgroundColor = `${primaryColor}15`;
+                      e.target.style.color = primaryColor;
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isPayrollOpen) {
+                      e.target.style.backgroundColor = "transparent";
+                      e.target.style.color = "#374151";
+                    }
+                  }}
+                  onClick={() => setIsPayrollOpen(!isPayrollOpen)}
+                >
+                  <FaMoneyBillWave size="16px" />
+                  <span className="ml-2">Payroll</span>
+                  <svg 
+                    className={`ml-auto w-4 h-4 transition-transform duration-200 ${isPayrollOpen ? 'rotate-180' : ''}`} 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </p>
+                {isPayrollOpen && (
+                  <div className="mt-1 space-y-0.5">
+                    {renderLink("/payroll/processing", FaMoneyBillWave, "Payroll Processing", true)}
+                    {renderLink("/payroll/payslips", FaFileInvoiceDollar, "Payslips", true)}
+                    {renderLink("/payroll/salary-structure", FaDollarSign, "Salary Structure", true)}
+                  </div>
+                )}
+              </div>
+            ) : (
+              renderCollapsedMenu(FaMoneyBillWave, isPayrollOpen, setIsPayrollOpen, true)
+            )}
+          </div>
+
+          {/* Banking Section */}
+          <div className="mb-6">
+            <h3 className={`text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 ${!isOpen && 'hidden'}`}>
+              Banking
+            </h3>
+            {isOpen ? (
+              <div>
+                <p
+                  className="flex items-center py-2 px-3 rounded-lg transition-all duration-200 cursor-pointer text-sm font-medium"
+                  style={{
+                    backgroundColor: isBankingOpen ? primaryColor : "transparent",
+                    color: isBankingOpen ? "white" : "#374151",
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isBankingOpen) {
+                      e.target.style.backgroundColor = `${primaryColor}15`;
+                      e.target.style.color = primaryColor;
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isBankingOpen) {
+                      e.target.style.backgroundColor = "transparent";
+                      e.target.style.color = "#374151";
+                    }
+                  }}
+                  onClick={() => setIsBankingOpen(!isBankingOpen)}
+                >
+                  <FaUniversity size="16px" />
+                  <span className="ml-2">Banking</span>
+                  <svg 
+                    className={`ml-auto w-4 h-4 transition-transform duration-200 ${isBankingOpen ? 'rotate-180' : ''}`} 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </p>
+                {isBankingOpen && (
+                  <div className="mt-1 space-y-0.5">
+                    {renderLink("/banking/accounts", FaUniversity, "Bank Accounts", true)}
+                    {renderLink("/banking/transactions", FaExchangeAlt, "Transactions", true)}
+                    {renderLink("/banking/reconciliation", FaBalanceScale, "Reconciliation", true)}
+                  </div>
+                )}
+              </div>
+            ) : (
+              renderCollapsedMenu(FaUniversity, isBankingOpen, setIsBankingOpen, true)
             )}
           </div>
 

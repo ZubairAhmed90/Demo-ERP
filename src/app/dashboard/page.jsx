@@ -19,7 +19,16 @@ import {
   FaBell,
   FaCalendarAlt,
   FaSearch,
-  FaFilter
+  FaFilter,
+  FaUserTie,
+  FaClock,
+  FaCalendar,
+  FaMoneyBillWave,
+  FaFileInvoiceDollar,
+  FaDollarSign,
+  FaUniversity,
+  FaExchangeAlt,
+  FaBalanceScale
 } from 'react-icons/fa';
 
 export default function Page() {
@@ -219,6 +228,45 @@ export default function Page() {
         break;
       case 'return-request':
         navigate('/return-request');
+        break;
+      // HR Actions
+      case 'hr-employees':
+        navigate('/hr/employees');
+        break;
+      case 'hr-create-employee':
+        navigate('/hr/create-employee');
+        break;
+      case 'hr-attendance':
+        navigate('/hr/attendance');
+        break;
+      case 'hr-leave-management':
+        navigate('/hr/leave-management');
+        break;
+      case 'hr-performance-reviews':
+        navigate('/hr/performance-reviews');
+        break;
+      // Payroll Actions
+      case 'payroll-processing':
+        navigate('/payroll/processing');
+        break;
+      case 'payroll-payslips':
+        navigate('/payroll/payslips');
+        break;
+      case 'payroll-salary-structure':
+        navigate('/payroll/salary-structure');
+        break;
+      // Banking Actions
+      case 'banking-accounts':
+        navigate('/banking/accounts');
+        break;
+      case 'banking-create-account':
+        navigate('/banking/create-account');
+        break;
+      case 'banking-transactions':
+        navigate('/banking/transactions');
+        break;
+      case 'banking-reconciliation':
+        navigate('/banking/reconciliation');
         break;
       default:
         console.log('Action not implemented:', action);
@@ -506,6 +554,86 @@ export default function Page() {
                     action: "opportunity",
                     color: "lime",
                     description: "Track opportunities"
+                  },
+                  // HR Quick Actions
+                  { 
+                    label: "Employee Management", 
+                    icon: <FaUserTie className="w-5 h-5" />, 
+                    action: "hr-employees",
+                    color: "blue",
+                    description: "Manage employees"
+                  },
+                  { 
+                    label: "Create Employee", 
+                    icon: <FaUserPlus className="w-5 h-5" />, 
+                    action: "hr-create-employee",
+                    color: "indigo",
+                    description: "Add new employee"
+                  },
+                  { 
+                    label: "Attendance", 
+                    icon: <FaClock className="w-5 h-5" />, 
+                    action: "hr-attendance",
+                    color: "green",
+                    description: "View attendance records"
+                  },
+                  { 
+                    label: "Leave Management", 
+                    icon: <FaCalendar className="w-5 h-5" />, 
+                    action: "hr-leave-management",
+                    color: "purple",
+                    description: "Manage leave requests"
+                  },
+                  // Payroll Quick Actions
+                  { 
+                    label: "Payroll Processing", 
+                    icon: <FaMoneyBillWave className="w-5 h-5" />, 
+                    action: "payroll-processing",
+                    color: "green",
+                    description: "Process payroll"
+                  },
+                  { 
+                    label: "Payslips", 
+                    icon: <FaFileInvoiceDollar className="w-5 h-5" />, 
+                    action: "payroll-payslips",
+                    color: "blue",
+                    description: "View payslips"
+                  },
+                  { 
+                    label: "Salary Structure", 
+                    icon: <FaDollarSign className="w-5 h-5" />, 
+                    action: "payroll-salary-structure",
+                    color: "yellow",
+                    description: "Manage salary structures"
+                  },
+                  // Banking Quick Actions
+                  { 
+                    label: "Bank Accounts", 
+                    icon: <FaUniversity className="w-5 h-5" />, 
+                    action: "banking-accounts",
+                    color: "blue",
+                    description: "Manage bank accounts"
+                  },
+                  { 
+                    label: "Create Bank Account", 
+                    icon: <FaUniversity className="w-5 h-5" />, 
+                    action: "banking-create-account",
+                    color: "indigo",
+                    description: "Add new bank account"
+                  },
+                  { 
+                    label: "Bank Transactions", 
+                    icon: <FaExchangeAlt className="w-5 h-5" />, 
+                    action: "banking-transactions",
+                    color: "green",
+                    description: "View transactions"
+                  },
+                  { 
+                    label: "Bank Reconciliation", 
+                    icon: <FaBalanceScale className="w-5 h-5" />, 
+                    action: "banking-reconciliation",
+                    color: "purple",
+                    description: "Reconcile bank statements"
                   }
                 ].map((action, index) => (
                   <button
