@@ -79,6 +79,18 @@ import SupplyChainDistribution from './supply-chain/distribution/page.jsx';
 // Reporting Module
 import ReportingReportBuilder from './reporting/report-builder/page.jsx';
 import ReportingScheduledReports from './reporting/scheduled-reports/page.jsx';
+// CRM Module
+import CRMCustomers from './crm/customers/page.jsx';
+import CRMContacts from './crm/contacts/page.jsx';
+import CRMLeads from './crm/leads/page.jsx';
+import CRMSalesPipeline from './crm/sales-pipeline/page.jsx';
+import CRMCommunicationHistory from './crm/communication-history/page.jsx';
+// Manufacturing Module
+import ManufacturingBOM from './manufacturing/bom/page.jsx';
+import ManufacturingProductionOrders from './manufacturing/production-orders/page.jsx';
+import ManufacturingWorkOrders from './manufacturing/work-orders/page.jsx';
+import ManufacturingQualityControl from './manufacturing/quality-control/page.jsx';
+import ManufacturingProductionPlanning from './manufacturing/production-planning/page.jsx';
 
 function App() {
   return (
@@ -161,6 +173,18 @@ function App() {
           {/* Reporting Routes */}
           <Route path="/reporting/report-builder" element={<ReportingReportBuilder />} />
           <Route path="/reporting/scheduled-reports" element={<ReportingScheduledReports />} />
+          {/* CRM Routes */}
+          <Route path="/crm/customers" element={<CRMCustomers />} />
+          <Route path="/crm/contacts" element={<CRMContacts />} />
+          <Route path="/crm/leads" element={<CRMLeads />} />
+          <Route path="/crm/sales-pipeline" element={<CRMSalesPipeline />} />
+          <Route path="/crm/communication-history" element={<CRMCommunicationHistory />} />
+          {/* Manufacturing Routes */}
+          <Route path="/manufacturing/bom" element={<ManufacturingBOM />} />
+          <Route path="/manufacturing/production-orders" element={<ManufacturingProductionOrders />} />
+          <Route path="/manufacturing/work-orders" element={<ManufacturingWorkOrders />} />
+          <Route path="/manufacturing/quality-control" element={<ManufacturingQualityControl />} />
+          <Route path="/manufacturing/production-planning" element={<ManufacturingProductionPlanning />} />
           {/* Reports & Settings */}
           <Route path="/reports" element={<Reports />} />
           <Route path="/settings" element={<Settings />} />

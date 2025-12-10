@@ -44,7 +44,15 @@ import {
   FaLayerGroup,
   FaChartPie,
   FaRoute,
-  FaChartArea
+  FaChartArea,
+  FaAddressBook,
+  FaLightbulb,
+  FaComments,
+  FaCogs,
+  FaIndustry,
+  FaClipboardList,
+  FaCheckCircle as FaCheckCircleIcon,
+  FaCalendarAlt as FaCalendarAltIcon
 } from "react-icons/fa";
 import { GoGraph } from "react-icons/go";
 import { font } from "../font/poppins";
@@ -71,6 +79,8 @@ const Sidebar = ({ isOpen = true }) => {
   const [isProcurementOpen, setIsProcurementOpen] = useState(false);
   const [isSupplyChainOpen, setIsSupplyChainOpen] = useState(false);
   const [isReportingOpen, setIsReportingOpen] = useState(false);
+  const [isCRMOpen, setIsCRMOpen] = useState(false);
+  const [isManufacturingOpen, setIsManufacturingOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -251,6 +261,59 @@ const Sidebar = ({ isOpen = true }) => {
               </div>
             ) : (
               renderCollapsedMenu(FaUsers, isUserOpen, setIsUserOpen, true)
+            )}
+          </div>
+
+          {/* CRM Section */}
+          <div className="mb-6">
+            <h3 className={`text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 ${!isOpen && 'hidden'}`}>
+              Customer Relationships
+            </h3>
+            {isOpen ? (
+              <div>
+                <p
+                  className="flex items-center py-2 px-3 rounded-lg transition-all duration-200 cursor-pointer text-sm font-medium"
+                  style={{
+                    backgroundColor: isCRMOpen ? primaryColor : "transparent",
+                    color: isCRMOpen ? "white" : "#374151",
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isCRMOpen) {
+                      e.target.style.backgroundColor = `${primaryColor}15`;
+                      e.target.style.color = primaryColor;
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isCRMOpen) {
+                      e.target.style.backgroundColor = "transparent";
+                      e.target.style.color = "#374151";
+                    }
+                  }}
+                  onClick={() => setIsCRMOpen(!isCRMOpen)}
+                >
+                  <FaUsers size="16px" />
+                  <span className="ml-2">CRM</span>
+                  <svg
+                    className={`ml-auto w-4 h-4 transition-transform duration-200 ${isCRMOpen ? 'rotate-180' : ''}`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </p>
+                {isCRMOpen && (
+                  <div className="mt-1 space-y-0.5">
+                    {renderLink("/crm/customers", FaUsers, "Customers", true)}
+                    {renderLink("/crm/contacts", FaAddressBook, "Contacts", true)}
+                    {renderLink("/crm/leads", FaLightbulb, "Leads", true)}
+                    {renderLink("/crm/sales-pipeline", FaProjectDiagram, "Sales Pipeline", true)}
+                    {renderLink("/crm/communication-history", FaComments, "Communication History", true)}
+                  </div>
+                )}
+              </div>
+            ) : (
+              renderCollapsedMenu(FaUsers, isCRMOpen, setIsCRMOpen, true)
             )}
           </div>
 
@@ -891,13 +954,66 @@ const Sidebar = ({ isOpen = true }) => {
                    )}
                  </div>
 
+                 {/* Manufacturing Section */}
+                 <div className="mb-6">
+                   <h3 className={`text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 ${!isOpen && 'hidden'}`}>
+                     Manufacturing
+                   </h3>
+                   {isOpen ? (
+                     <div>
+                       <p
+                         className="flex items-center py-2 px-3 rounded-lg transition-all duration-200 cursor-pointer text-sm font-medium"
+                         style={{
+                           backgroundColor: isManufacturingOpen ? primaryColor : "transparent",
+                           color: isManufacturingOpen ? "white" : "#374151",
+                         }}
+                         onMouseEnter={(e) => {
+                           if (!isManufacturingOpen) {
+                             e.target.style.backgroundColor = `${primaryColor}15`;
+                             e.target.style.color = primaryColor;
+                           }
+                         }}
+                         onMouseLeave={(e) => {
+                           if (!isManufacturingOpen) {
+                             e.target.style.backgroundColor = "transparent";
+                             e.target.style.color = "#374151";
+                           }
+                         }}
+                         onClick={() => setIsManufacturingOpen(!isManufacturingOpen)}
+                       >
+                         <FaIndustry size="16px" />
+                         <span className="ml-2">Manufacturing</span>
+                         <svg
+                           className={`ml-auto w-4 h-4 transition-transform duration-200 ${isManufacturingOpen ? 'rotate-180' : ''}`}
+                           fill="none"
+                           stroke="currentColor"
+                           viewBox="0 0 24 24"
+                         >
+                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                         </svg>
+                       </p>
+                       {isManufacturingOpen && (
+                         <div className="mt-1 space-y-0.5">
+                           {renderLink("/manufacturing/bom", FaCogs, "Bill of Materials", true)}
+                           {renderLink("/manufacturing/production-orders", FaIndustry, "Production Orders", true)}
+                           {renderLink("/manufacturing/work-orders", FaClipboardList, "Work Orders", true)}
+                           {renderLink("/manufacturing/quality-control", FaCheckCircle, "Quality Control", true)}
+                           {renderLink("/manufacturing/production-planning", FaCalendarAlt, "Production Planning", true)}
+                         </div>
+                       )}
+                     </div>
+                   ) : (
+                     renderCollapsedMenu(FaIndustry, isManufacturingOpen, setIsManufacturingOpen, true)
+                   )}
+                 </div>
+
                  {/* Settings Section */}
                  <div className="mb-6">
                    <h3 className={`text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 ${!isOpen && 'hidden'}`}>
                      Settings
                    </h3>
                    {renderLink("/settings", FaCog, "Settings")}
-          </div>
+                 </div>
         </nav>
       </div>
     </aside>
