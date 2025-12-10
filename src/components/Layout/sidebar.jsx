@@ -49,7 +49,11 @@ import {
   FaLightbulb,
   FaComments,
   FaCogs,
-  FaIndustry
+  FaIndustry,
+  FaBell,
+  FaStickyNote,
+  FaEnvelope,
+  FaTasks
 } from "react-icons/fa";
 import { GoGraph } from "react-icons/go";
 import { font } from "../font/poppins";
@@ -80,6 +84,7 @@ const Sidebar = ({ isOpen = true }) => {
   const [isReportingOpen, setIsReportingOpen] = useState(false);
   const [isCRMOpen, setIsCRMOpen] = useState(false);
   const [isManufacturingOpen, setIsManufacturingOpen] = useState(false);
+  const [isCommunicationOpen, setIsCommunicationOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -1057,6 +1062,58 @@ const Sidebar = ({ isOpen = true }) => {
                    </h3>
                    {renderLink("/notifications", FaBell, "All Notifications")}
                    {renderLink("/notifications/preferences", FaCog, "Preferences", true)}
+                 </div>
+
+                 {/* Communication & Collaboration Section */}
+                 <div className="mb-6">
+                   <h3 className={`text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 ${!isOpen && 'hidden'}`}>
+                     Communication
+                   </h3>
+                   {isOpen ? (
+                     <div>
+                       <p
+                         className="flex items-center py-2 px-3 rounded-lg transition-all duration-200 cursor-pointer text-sm font-medium"
+                         style={{
+                           backgroundColor: isCommunicationOpen ? primaryColor : "transparent",
+                           color: isCommunicationOpen ? "white" : "#374151",
+                         }}
+                         onMouseEnter={(e) => {
+                           if (!isCommunicationOpen) {
+                             e.target.style.backgroundColor = `${primaryColor}15`;
+                             e.target.style.color = primaryColor;
+                           }
+                         }}
+                         onMouseLeave={(e) => {
+                           if (!isCommunicationOpen) {
+                             e.target.style.backgroundColor = "transparent";
+                             e.target.style.color = "#374151";
+                           }
+                         }}
+                         onClick={() => setIsCommunicationOpen(!isCommunicationOpen)}
+                       >
+                         <FaComments size="16px" />
+                         <span className="ml-2">Communication</span>
+                         <svg
+                           className={`ml-auto w-4 h-4 transition-transform duration-200 ${isCommunicationOpen ? 'rotate-180' : ''}`}
+                           fill="none"
+                           stroke="currentColor"
+                           viewBox="0 0 24 24"
+                         >
+                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                         </svg>
+                       </p>
+                       {isCommunicationOpen && (
+                         <div className="mt-1 space-y-0.5">
+                           {renderLink("/notes", FaStickyNote, "Notes & Comments", true)}
+                           {renderLink("/messaging", FaEnvelope, "Messaging", true)}
+                           {renderLink("/tasks", FaTasks, "Tasks", true)}
+                           {renderLink("/calendar", FaCalendarAlt, "Calendar", true)}
+                         </div>
+                       )}
+                     </div>
+                   ) : (
+                     renderCollapsedMenu(FaComments, isCommunicationOpen, setIsCommunicationOpen, true)
+                   )}
                  </div>
 
                  {/* Documents Section */}

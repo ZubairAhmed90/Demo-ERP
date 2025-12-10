@@ -29,6 +29,11 @@ import AuditTrail from './audit-trail/page.jsx';
 import FixedAssetsDepreciation from './fixed-assets/depreciation/page.jsx';
 // Currency Management
 import Currencies from './currencies/page.jsx';
+// Communication & Collaboration
+import Notes from './notes/page.jsx';
+import Messaging from './messaging/page.jsx';
+import Tasks from './tasks/page.jsx';
+import Calendar from './calendar/page.jsx';
 import SalesOrder from './sales-order/page.jsx';
 import SalesQuotation from './sales-quotation/page.jsx';
 import PurchaseOrder from './purchase-order/page.jsx';
@@ -239,6 +244,11 @@ function App() {
           <Route path="/audit-trail" element={<AuditTrail />} />
           {/* Currency Management Routes */}
           <Route path="/currencies" element={<Currencies />} />
+          {/* Communication & Collaboration Routes */}
+          <Route path="/notes" element={<Notes />} />
+          <Route path="/messaging" element={<Messaging />} />
+          <Route path="/tasks" element={<Tasks />} />
+          <Route path="/calendar" element={<Calendar />} />
           {/* Reports & Settings */}
           <Route path="/reports" element={<Reports />} />
           <Route path="/settings" element={<Settings />} />
