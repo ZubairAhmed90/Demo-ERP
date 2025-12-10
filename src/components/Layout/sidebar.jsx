@@ -29,7 +29,21 @@ import {
   FaFileInvoiceDollar,
   FaStar,
   FaBalanceScale,
-  FaDollarSign
+  FaDollarSign,
+  FaBook,
+  FaSitemap,
+  FaFileAlt,
+  FaChartLine,
+  FaBuilding as FaBuildingIcon,
+  FaBox,
+  FaArrowDown,
+  FaClipboardCheck,
+  FaChartBar,
+  FaProjectDiagram,
+  FaCheckCircle,
+  FaHistory,
+  FaPercent,
+  FaLayerGroup
 } from "react-icons/fa";
 import { GoGraph } from "react-icons/go";
 import { font } from "../font/poppins";
@@ -49,6 +63,10 @@ const Sidebar = ({ isOpen = true }) => {
   const [isHROpen, setIsHROpen] = useState(false);
   const [isPayrollOpen, setIsPayrollOpen] = useState(false);
   const [isBankingOpen, setIsBankingOpen] = useState(false);
+  const [isFinanceOpen, setIsFinanceOpen] = useState(false);
+  const [isFixedAssetsOpen, setIsFixedAssetsOpen] = useState(false);
+  const [isWorkflowOpen, setIsWorkflowOpen] = useState(false);
+  const [isTaxOpen, setIsTaxOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -328,7 +346,13 @@ const Sidebar = ({ isOpen = true }) => {
                 </p>
                 {isInventoryOpen && (
                   <div className="mt-1 space-y-0.5">
-                    {renderLink("/inventory-req", FaExchangeAlt, "Inventory Transfer Req.", true)}
+                    {renderLink("/inventory/items", FaBox, "Items/Products", true)}
+                    {renderLink("/inventory/warehouses", FaWarehouse, "Warehouses", true)}
+                    {renderLink("/inventory/stock-levels", FaChartBar, "Stock Levels", true)}
+                    {renderLink("/inventory/counting", FaClipboardList, "Inventory Counting", true)}
+                    {renderLink("/inventory/goods-issue", FaArrowDown, "Goods Issue", true)}
+                    {renderLink("/inventory/transfer", FaExchangeAlt, "Inventory Transfer", true)}
+                    {renderLink("/inventory-req", FaExchangeAlt, "Transfer Request", true)}
                   </div>
                 )}
               </div>
@@ -547,14 +571,176 @@ const Sidebar = ({ isOpen = true }) => {
             )}
           </div>
 
-          {/* Reports Section */}
-          <div className="mb-6">
-            <h3 className={`text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 ${!isOpen && 'hidden'}`}>
-              Reports
-            </h3>
-            {renderLink("/reports", FaChartBar, "Analytics")}
-            {renderLink("/settings", FaCog, "Settings")}
-          </div>
+                 {/* Finance Section */}
+                 <div className="mb-6">
+                   <h3 className={`text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 ${!isOpen && 'hidden'}`}>
+                     Finance & Accounting
+                   </h3>
+                   {isOpen ? (
+                     <div>
+                       <p
+                         className="flex items-center py-2 px-3 rounded-lg transition-all duration-200 cursor-pointer text-sm font-medium"
+                         style={{
+                           backgroundColor: isFinanceOpen ? primaryColor : "transparent",
+                           color: isFinanceOpen ? "white" : "#374151",
+                         }}
+                         onMouseEnter={(e) => {
+                           if (!isFinanceOpen) {
+                             e.target.style.backgroundColor = `${primaryColor}15`;
+                             e.target.style.color = primaryColor;
+                           }
+                         }}
+                         onMouseLeave={(e) => {
+                           if (!isFinanceOpen) {
+                             e.target.style.backgroundColor = "transparent";
+                             e.target.style.color = "#374151";
+                           }
+                         }}
+                         onClick={() => setIsFinanceOpen(!isFinanceOpen)}
+                       >
+                         <FaBook size="16px" />
+                         <span className="ml-2">Finance</span>
+                         <svg
+                           className={`ml-auto w-4 h-4 transition-transform duration-200 ${isFinanceOpen ? 'rotate-180' : ''}`}
+                           fill="none"
+                           stroke="currentColor"
+                           viewBox="0 0 24 24"
+                         >
+                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                         </svg>
+                       </p>
+                       {isFinanceOpen && (
+                         <div className="mt-1 space-y-0.5">
+                           {renderLink("/finance/general-ledger", FaBook, "General Ledger", true)}
+                           {renderLink("/finance/chart-of-accounts", FaSitemap, "Chart of Accounts", true)}
+                           {renderLink("/finance/journal-entries", FaFileAlt, "Journal Entries", true)}
+                           {renderLink("/finance/financial-reports", FaChartLine, "Financial Reports", true)}
+                           {renderLink("/finance/budget-management", FaDollarSign, "Budget Management", true)}
+                         </div>
+                       )}
+                     </div>
+                   ) : (
+                     renderCollapsedMenu(FaBook, isFinanceOpen, setIsFinanceOpen, true)
+                   )}
+                 </div>
+
+                 {/* Fixed Assets Section */}
+                 <div className="mb-6">
+                   <h3 className={`text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 ${!isOpen && 'hidden'}`}>
+                     Fixed Assets
+                   </h3>
+                   {renderLink("/fixed-assets/register", FaBuildingIcon, "Asset Register")}
+                 </div>
+
+                 {/* Workflow Section */}
+                 <div className="mb-6">
+                   <h3 className={`text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 ${!isOpen && 'hidden'}`}>
+                     Workflow
+                   </h3>
+                   {isOpen ? (
+                     <div>
+                       <p
+                         className="flex items-center py-2 px-3 rounded-lg transition-all duration-200 cursor-pointer text-sm font-medium"
+                         style={{
+                           backgroundColor: isWorkflowOpen ? primaryColor : "transparent",
+                           color: isWorkflowOpen ? "white" : "#374151",
+                         }}
+                         onMouseEnter={(e) => {
+                           if (!isWorkflowOpen) {
+                             e.target.style.backgroundColor = `${primaryColor}15`;
+                             e.target.style.color = primaryColor;
+                           }
+                         }}
+                         onMouseLeave={(e) => {
+                           if (!isWorkflowOpen) {
+                             e.target.style.backgroundColor = "transparent";
+                             e.target.style.color = "#374151";
+                           }
+                         }}
+                         onClick={() => setIsWorkflowOpen(!isWorkflowOpen)}
+                       >
+                         <FaProjectDiagram size="16px" />
+                         <span className="ml-2">Workflow</span>
+                         <svg
+                           className={`ml-auto w-4 h-4 transition-transform duration-200 ${isWorkflowOpen ? 'rotate-180' : ''}`}
+                           fill="none"
+                           stroke="currentColor"
+                           viewBox="0 0 24 24"
+                         >
+                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                         </svg>
+                       </p>
+                       {isWorkflowOpen && (
+                         <div className="mt-1 space-y-0.5">
+                           {renderLink("/workflow/workflows", FaProjectDiagram, "Workflows", true)}
+                           {renderLink("/workflow/approval-requests", FaCheckCircle, "Approval Requests", true)}
+                           {renderLink("/workflow/approval-history", FaHistory, "Approval History", true)}
+                         </div>
+                       )}
+                     </div>
+                   ) : (
+                     renderCollapsedMenu(FaProjectDiagram, isWorkflowOpen, setIsWorkflowOpen, true)
+                   )}
+                 </div>
+
+                 {/* Tax Section */}
+                 <div className="mb-6">
+                   <h3 className={`text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 ${!isOpen && 'hidden'}`}>
+                     Tax Management
+                   </h3>
+                   {isOpen ? (
+                     <div>
+                       <p
+                         className="flex items-center py-2 px-3 rounded-lg transition-all duration-200 cursor-pointer text-sm font-medium"
+                         style={{
+                           backgroundColor: isTaxOpen ? primaryColor : "transparent",
+                           color: isTaxOpen ? "white" : "#374151",
+                         }}
+                         onMouseEnter={(e) => {
+                           if (!isTaxOpen) {
+                             e.target.style.backgroundColor = `${primaryColor}15`;
+                             e.target.style.color = primaryColor;
+                           }
+                         }}
+                         onMouseLeave={(e) => {
+                           if (!isTaxOpen) {
+                             e.target.style.backgroundColor = "transparent";
+                             e.target.style.color = "#374151";
+                           }
+                         }}
+                         onClick={() => setIsTaxOpen(!isTaxOpen)}
+                       >
+                         <FaPercent size="16px" />
+                         <span className="ml-2">Tax</span>
+                         <svg
+                           className={`ml-auto w-4 h-4 transition-transform duration-200 ${isTaxOpen ? 'rotate-180' : ''}`}
+                           fill="none"
+                           stroke="currentColor"
+                           viewBox="0 0 24 24"
+                         >
+                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                         </svg>
+                       </p>
+                       {isTaxOpen && (
+                         <div className="mt-1 space-y-0.5">
+                           {renderLink("/tax/tax-codes", FaPercent, "Tax Codes", true)}
+                           {renderLink("/tax/tax-groups", FaLayerGroup, "Tax Groups", true)}
+                         </div>
+                       )}
+                     </div>
+                   ) : (
+                     renderCollapsedMenu(FaPercent, isTaxOpen, setIsTaxOpen, true)
+                   )}
+                 </div>
+
+                 {/* Reports Section */}
+                 <div className="mb-6">
+                   <h3 className={`text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 ${!isOpen && 'hidden'}`}>
+                     Reports
+                   </h3>
+                   {renderLink("/reports", FaChartBar, "Analytics")}
+                   {renderLink("/settings", FaCog, "Settings")}
+                 </div>
         </nav>
       </div>
     </aside>

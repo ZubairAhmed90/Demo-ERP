@@ -18,6 +18,13 @@ import GoodsReceiptsPO from './goods-receipts-po/page.jsx';
 import GoodsReturn from './goods-return/page.jsx';
 import GoodsReturnRequest from './goods-return-request/page.jsx';
 import InventoryReq from './inventory-req/page.jsx';
+// Inventory Module
+import InventoryItems from './inventory/items/page.jsx';
+import InventoryWarehouses from './inventory/warehouses/page.jsx';
+import InventoryStockLevels from './inventory/stock-levels/page.jsx';
+import InventoryCounting from './inventory/counting/page.jsx';
+import InventoryGoodsIssue from './inventory/goods-issue/page.jsx';
+import InventoryTransfer from './inventory/transfer/page.jsx';
 import Delivery from './delivery/page.jsx';
 import Return from './return/page.jsx';
 import ReturnRequest from './return-request/page.jsx';
@@ -44,6 +51,22 @@ import BankingAccounts from './banking/accounts/page.jsx';
 import BankingTransactions from './banking/transactions/page.jsx';
 import BankingReconciliation from './banking/reconciliation/page.jsx';
 import BankingCreateAccount from './banking/create-account/page.jsx';
+// Finance Module
+import FinanceGeneralLedger from './finance/general-ledger/page.jsx';
+import FinanceChartOfAccounts from './finance/chart-of-accounts/page.jsx';
+import FinanceJournalEntries from './finance/journal-entries/page.jsx';
+import FinanceCreateJournalEntry from './finance/create-journal-entry/page.jsx';
+import FinanceFinancialReports from './finance/financial-reports/page.jsx';
+import FinanceBudgetManagement from './finance/budget-management/page.jsx';
+// Fixed Assets Module
+import FixedAssetsRegister from './fixed-assets/register/page.jsx';
+// Workflow Module
+import WorkflowWorkflows from './workflow/workflows/page.jsx';
+import WorkflowApprovalRequests from './workflow/approval-requests/page.jsx';
+import WorkflowApprovalHistory from './workflow/approval-history/page.jsx';
+// Tax Module
+import TaxTaxCodes from './tax/tax-codes/page.jsx';
+import TaxTaxGroups from './tax/tax-groups/page.jsx';
 
 function App() {
   return (
@@ -67,6 +90,13 @@ function App() {
           <Route path="/goods-return" element={<GoodsReturn />} />
           <Route path="/goods-return-request" element={<GoodsReturnRequest />} />
           <Route path="/inventory-req" element={<InventoryReq />} />
+          {/* Inventory Routes */}
+          <Route path="/inventory/items" element={<InventoryItems />} />
+          <Route path="/inventory/warehouses" element={<InventoryWarehouses />} />
+          <Route path="/inventory/stock-levels" element={<InventoryStockLevels />} />
+          <Route path="/inventory/counting" element={<InventoryCounting />} />
+          <Route path="/inventory/goods-issue" element={<InventoryGoodsIssue />} />
+          <Route path="/inventory/transfer" element={<InventoryTransfer />} />
           <Route path="/delivery" element={<Delivery />} />
           <Route path="/return" element={<Return />} />
           <Route path="/return-request" element={<ReturnRequest />} />
@@ -91,6 +121,22 @@ function App() {
           <Route path="/banking/create-account" element={<BankingCreateAccount />} />
           <Route path="/banking/transactions" element={<BankingTransactions />} />
           <Route path="/banking/reconciliation" element={<BankingReconciliation />} />
+          {/* Finance Routes */}
+          <Route path="/finance/general-ledger" element={<FinanceGeneralLedger />} />
+          <Route path="/finance/chart-of-accounts" element={<FinanceChartOfAccounts />} />
+          <Route path="/finance/journal-entries" element={<FinanceJournalEntries />} />
+          <Route path="/finance/create-journal-entry" element={<FinanceCreateJournalEntry />} />
+          <Route path="/finance/financial-reports" element={<FinanceFinancialReports />} />
+          <Route path="/finance/budget-management" element={<FinanceBudgetManagement />} />
+          {/* Fixed Assets Routes */}
+          <Route path="/fixed-assets/register" element={<FixedAssetsRegister />} />
+          {/* Workflow Routes */}
+          <Route path="/workflow/workflows" element={<WorkflowWorkflows />} />
+          <Route path="/workflow/approval-requests" element={<WorkflowApprovalRequests />} />
+          <Route path="/workflow/approval-history" element={<WorkflowApprovalHistory />} />
+          {/* Tax Routes */}
+          <Route path="/tax/tax-codes" element={<TaxTaxCodes />} />
+          <Route path="/tax/tax-groups" element={<TaxTaxGroups />} />
           {/* Reports & Settings */}
           <Route path="/reports" element={<Reports />} />
           <Route path="/settings" element={<Settings />} />
