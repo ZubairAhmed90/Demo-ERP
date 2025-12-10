@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { font } from "../../components/font/poppins.jsx";
 import { useColor } from "../../context/ColorContext.jsx";
 import ParticlesComponent from "../../components/particles/particles.jsx";
@@ -179,9 +179,13 @@ const Login = () => {
               Sign In
             </button>
 
-            <p className="text-center text-gray-500 hover:underline text-sm">
+            <Link
+              to="/forgot-password"
+              className="block text-center text-gray-500 hover:underline text-sm transition-colors"
+              style={{ color: primaryColor }}
+            >
               Forgot Password?
-            </p>
+            </Link>
           </form>
         </div>
       </div>

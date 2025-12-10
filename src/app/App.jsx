@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import RootLayout from './layout.jsx';
 import Home from './page.jsx';
 import Login from './login/page.jsx';
+import ForgotPassword from './forgot-password/page.jsx';
+import ResetPassword from './reset-password/page.jsx';
 import Dashboard from './dashboard/page.jsx';
 import Company from './company/page.jsx';
 import CreateCompany from './create-company/page.jsx';
@@ -104,8 +106,10 @@ function App() {
     <Router>
       <RootLayout>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/company" element={<Company />} />
           <Route path="/create-company" element={<CreateCompany />} />
