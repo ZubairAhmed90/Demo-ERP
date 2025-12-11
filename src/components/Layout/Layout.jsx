@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import Sidebar from './sidebar';
 import { useColor } from '../../context/ColorContext';
 import CustomButton from '../buttons/customButton/customButton';
-import NotificationCenter from '../Notifications/NotificationCenter';
 import { font } from '../font/poppins';
 
 export default function Layout({ children }) {
@@ -15,25 +14,24 @@ export default function Layout({ children }) {
   return (
     <div className={`${font.className} h-screen flex flex-col overflow-hidden`}>
       {/* Navbar / Header */}
-      <header className="flex items-center justify-between px-6 py-3 border-b border-gray-200 bg-white shadow-sm z-10" style={{ background: navbar ? secondaryColor : "white" }}>
-        <img src="/colored-logo.png" className='w-auto h-14 p-2' alt="cOMPANY Logo" />
+      <header className="flex items-center justify-between px-4 py-2 border-b border-gray-200 bg-white shadow-sm z-10" style={{ background: navbar ? secondaryColor : "white" }}>
+        <img src="/colored-logo.png" className='w-auto h-8 p-1' alt="cOMPANY Logo" />
         
         <h1
-          className="text-xl font-semibold"
+          className="text-lg font-semibold"
           style={{ color: primaryColor, filter: 'brightness(70%)' }} 
         >
           Welcome To tychora Portal
         </h1>
 
-        <div className="flex items-center space-x-4">
-          <NotificationCenter />
+        <div className="flex items-center space-x-3">
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors"
             style={{ color: primaryColor }}
             title={sidebarOpen ? "Collapse Sidebar" : "Expand Sidebar"}
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
